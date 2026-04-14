@@ -6,44 +6,42 @@
   <title>Beginning and Middle Sound A</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
-    :root {
-      --pink:#FF6B9D; --yellow:#FFD93D; --green:#6BCB77;
-      --blue:#4D96FF; --purple:#C77DFF; --orange:#FF9A3C; --red:#FF5252;
-    }
+    :root { --pink:#FF6B9D; --yellow:#FFD93D; --green:#6BCB77; --blue:#4D96FF; --purple:#C77DFF; --orange:#FF9A3C; --red:#FF5252; }
     *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FFF0F8 0%,#FFF9E6 50%,#F0F8FF 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px 16px 40px;overflow-x:hidden;}
-    .card{background:white;border-radius:32px;padding:32px 36px 36px;max-width:680px;width:100%;box-shadow:0 10px 40px rgba(255,107,157,.15),0 4px 12px rgba(0,0,0,.08);}
-    header{text-align:center;margin-bottom:20px;}
-    .header-emoji{font-size:52px;display:block;animation:bounce 1.6s infinite;margin-bottom:4px;}
-    header h1{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;margin-bottom:4px;line-height:1.2;}
-    .subtitle{font-size:1rem;color:#777;font-weight:700;}
-    .btn-speak-inst{background:none;border:none;font-size:1.5rem;cursor:pointer;vertical-align:middle;transition:transform .2s;}
+    body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FFF0F8 0%,#FFF9E6 50%,#F0F8FF 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 16px 50px;}
+    .card{background:white;border-radius:32px;padding:30px 34px 34px;max-width:680px;width:100%;box-shadow:0 10px 40px rgba(255,107,157,.15),0 4px 12px rgba(0,0,0,.08);margin-top:10px;}
+    header{text-align:center;margin-bottom:18px;}
+    .header-emoji{font-size:50px;display:block;animation:bounce 1.6s infinite;margin-bottom:2px;}
+    header h1{font-family:'Fredoka One',cursive;font-size:1.9rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;margin-bottom:4px;line-height:1.2;}
+    .subtitle{font-size:.95rem;color:#777;font-weight:700;}
+    .btn-speak-inst{background:none;border:none;font-size:1.4rem;cursor:pointer;vertical-align:middle;transition:transform .2s;}
     .btn-speak-inst:hover{transform:scale(1.25);}
-    .badge{display:inline-block;padding:3px 12px;border-radius:99px;font-size:.8rem;font-weight:800;margin-left:8px;vertical-align:middle;}
-    .badge-middle{background:#FFE0EE;color:#CC2266;}
+    .progress-wrap{background:#EEE;border-radius:99px;height:13px;margin-bottom:5px;overflow:hidden;}
+    .progress-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--orange));transition:width .6s cubic-bezier(.34,1.56,.64,1);width:0%;}
+    .progress-label{text-align:right;font-size:.82rem;color:#AAA;font-weight:700;margin-bottom:20px;}
+    .position-badge{display:inline-block;padding:5px 16px;border-radius:99px;font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:14px;text-align:center;width:100%;}
     .badge-begin{background:#E0F0FF;color:#1155CC;}
-    .progress-wrap{background:#EEE;border-radius:99px;height:14px;margin-bottom:6px;overflow:hidden;}
-    .progress-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--orange));transition:width .55s cubic-bezier(.34,1.56,.64,1);}
-    .progress-label{text-align:right;font-size:.85rem;color:#999;font-weight:700;margin-bottom:22px;}
-    .word-area{display:flex;align-items:center;justify-content:center;gap:28px;margin-bottom:24px;flex-wrap:wrap;}
-    .picture-box{font-size:92px;line-height:1;filter:drop-shadow(2px 4px 8px rgba(0,0,0,.12));animation:popIn .45s cubic-bezier(.34,1.56,.64,1);}
-    .letter-boxes{display:flex;gap:10px;align-items:center;}
-    .letter-box{width:80px;height:90px;border-radius:18px;border:4px solid #DDD;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:2.8rem;background:#FAFAFA;transition:border-color .3s,background .3s;}
+    .badge-middle{background:#FFE0EE;color:#CC2266;}
+    .word-area{display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:20px;flex-wrap:wrap;}
+    .picture-box{font-size:88px;line-height:1;filter:drop-shadow(2px 4px 8px rgba(0,0,0,.12));animation:popIn .45s cubic-bezier(.34,1.56,.64,1);}
+    .letter-boxes{display:flex;gap:8px;align-items:center;}
+    .letter-box{width:76px;height:86px;border-radius:16px;border:4px solid #DDD;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:2.6rem;background:#FAFAFA;transition:all .3s;}
     .letter-box.given{color:#444;border-color:var(--blue);background:#EEF6FF;}
     .letter-box.blank{border-color:var(--pink);border-style:dashed;background:#FFF0F6;font-size:2rem;color:#CCC;}
     .letter-box.filled-correct{border-color:var(--green);border-style:solid;background:#EDFFF1;color:var(--green);animation:pop .4s cubic-bezier(.34,1.56,.64,1);}
     .letter-box.filled-wrong{border-color:var(--red);border-style:solid;background:#FFF0F0;color:var(--red);animation:shake .45s;}
-    .word-label{text-align:center;font-family:'Fredoka One',cursive;font-size:1.15rem;color:#AAA;margin-bottom:22px;letter-spacing:3px;}
-    .choice-label{text-align:center;font-size:1rem;font-weight:800;color:var(--purple);margin-bottom:12px;}
-    .choices{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
+    .word-label{text-align:center;font-family:'Fredoka One',cursive;font-size:1.1rem;color:#CCC;margin-bottom:18px;letter-spacing:4px;}
+    .choice-label{text-align:center;font-size:.95rem;font-weight:800;color:var(--purple);margin-bottom:12px;}
+    .choices{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:22px;}
     .choice-btn{width:74px;height:74px;border-radius:18px;border:none;font-family:'Fredoka One',cursive;font-size:2.1rem;cursor:pointer;color:white;box-shadow:0 5px 0 rgba(0,0,0,.22);transition:transform .15s,box-shadow .15s,background .2s;background:var(--blue);}
     .choice-btn:hover:not(:disabled){transform:translateY(-5px) scale(1.1);box-shadow:0 10px 0 rgba(0,0,0,.18);}
-    .choice-btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.2);}
+    .choice-btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.2);}
     .choice-btn:disabled{opacity:.38;cursor:default;transform:none !important;box-shadow:0 2px 0 rgba(0,0,0,.1);}
     .choice-btn.correct-letter{background:var(--pink);}
     .choice-btn.selected-correct{background:var(--green) !important;box-shadow:0 5px 0 #2e7a3e;}
     .choice-btn.selected-wrong{background:var(--red) !important;box-shadow:0 5px 0 #990000;}
-    .feedback{min-height:54px;text-align:center;font-family:'Fredoka One',cursive;font-size:1.3rem;border-radius:16px;padding:10px 20px;margin-bottom:18px;transition:opacity .3s;}
+    .choice-btn.reveal-correct{outline:5px solid var(--green);outline-offset:3px;}
+    .feedback{min-height:52px;text-align:center;font-family:'Fredoka One',cursive;font-size:1.25rem;border-radius:16px;padding:10px 18px;margin-bottom:16px;transition:opacity .3s;}
     .feedback.hidden{opacity:0;pointer-events:none;}
     .feedback.correct-fb{background:#EDFFF1;color:#2A7A3A;}
     .feedback.wrong-fb{background:#FFF0F0;color:#CC0000;}
@@ -57,353 +55,309 @@
     .overlay .big-emoji{font-size:96px;animation:bounce 1s infinite;}
     .overlay h2{font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;}
     .overlay p{font-size:1.1rem;color:#555;font-weight:700;max-width:340px;}
-    .btn-restart{margin-top:8px;padding:15px 46px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--pink),var(--purple));color:white;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;box-shadow:0 6px 0 #7a00cc;}
+    .btn-restart{margin-top:10px;padding:15px 46px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--pink),var(--purple));color:white;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;box-shadow:0 6px 0 #7a00cc;}
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
     @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
     @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
     @keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     #confetti{position:fixed;inset:0;pointer-events:none;z-index:99;}
-    @media(max-width:480px){
-      header h1{font-size:1.5rem;}
-      .letter-box{width:64px;height:74px;font-size:2.1rem;}
-      .picture-box{font-size:72px;}
-      .choice-btn{width:60px;height:60px;font-size:1.7rem;}
-    }
+    @media(max-width:480px){header h1{font-size:1.5rem;}.letter-box{width:62px;height:72px;font-size:2rem;}.picture-box{font-size:72px;}.choice-btn{width:60px;height:60px;font-size:1.7rem;}}
   </style>
 </head>
 <body>
 <canvas id="confetti"></canvas>
-
-<!-- End screen -->
 <div class="overlay" id="overlay">
-  <div class="big-emoji" id="overlayEmoji">&#x1F3C6;</div>
+  <div class="big-emoji" id="overlayEmoji">🏆</div>
   <h2 id="overlayTitle">Amazing!</h2>
   <p id="overlayMsg">You finished!</p>
   <div class="score-row" style="margin-top:6px">
-    <span class="score-pill correct-pill" id="finalCorrect">&#x2705; 0 correct</span>
-    <span class="score-pill wrong-pill"   id="finalWrong">&#x274C; 0 wrong</span>
+    <span class="score-pill correct-pill" id="finalCorrect">✅ 0 correct</span>
+    <span class="score-pill wrong-pill" id="finalWrong">❌ 0 wrong</span>
   </div>
-  <button class="btn-restart" onclick="restartGame()">&#x1F504; Play Again!</button>
+  <button class="btn-restart" onclick="restartGame()">🔄 Play Again!</button>
 </div>
-
-<!-- Main card -->
 <div class="card">
   <header>
-    <span class="header-emoji">&#x1F34E;</span>
+    <span class="header-emoji">🍎</span>
     <h1>Beginning and Middle Sound <span style="color:var(--orange)">A</span>!</h1>
-    <p class="subtitle">
-      Find the letter A in each word!
-      <button class="btn-speak-inst" onclick="speakInstructions()" title="Hear instructions">&#x1F50A;</button>
-    </p>
+    <p class="subtitle">Listen for the letter A! <button class="btn-speak-inst" onclick="speakInstructions()" title="Hear instructions">🔊</button></p>
   </header>
-
-  <div class="progress-wrap">
-    <div class="progress-bar" id="progressBar" style="width:0%"></div>
-  </div>
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
   <div class="progress-label" id="progressLabel">Word 1 of 10</div>
-
+  <div class="position-badge badge-begin" id="positionBadge">Beginning Sound</div>
   <div class="word-area">
-    <div class="picture-box" id="pictureBox">&#x1F34E;</div>
+    <div class="picture-box" id="pictureBox">🍎</div>
     <div class="letter-boxes" id="letterBoxes"></div>
   </div>
-
   <div class="word-label" id="wordLabel">_ _ _</div>
-
-  <div class="choice-label" id="choiceLabel">
-    Which letter makes the sound? &#x1F447;
-  </div>
-
+  <div class="choice-label">Which letter makes the sound? 👇</div>
   <div class="choices" id="choices"></div>
-
   <div class="feedback hidden" id="feedback"></div>
-
   <div class="score-row">
-    <span class="score-pill correct-pill" id="scoreCorrect">&#x2705; 0 correct</span>
-    <span class="score-pill wrong-pill"   id="scoreWrong">&#x274C; 0 wrong</span>
+    <span class="score-pill correct-pill" id="scoreCorrect">✅ 0 correct</span>
+    <span class="score-pill wrong-pill" id="scoreWrong">❌ 0 wrong</span>
   </div>
 </div>
-
 <script>
-/* =========================================================
-   WORD DATA
-   type: "middle" = blank is index 1
-         "begin"  = blank is index 0
-   ========================================================= */
 const WORDS = [
-  // ── MIDDLE sound A ──
-  { emoji: String.fromCodePoint(0x1FAD9), word: 'jam', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F690), word: 'van', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F431), word: 'cat', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F9E2), word: 'cap', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F987), word: 'bat', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F5FA), word: 'map', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F6CD), word: 'bag', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F6B0), word: 'tap', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F40F), word: 'ram', blankIdx: 1, type: 'middle' },
-  { emoji: String.fromCodePoint(0x1F9B8), word: 'man', blankIdx: 1, type: 'middle' },
-  // ── BEGINNING sound A ──
-  { emoji: String.fromCodePoint(0x1F34E), word: 'apple', blankIdx: 0, type: 'begin', display: 'apple' },
-  { emoji: String.fromCodePoint(0x2693),  word: 'anchor', blankIdx: 0, type: 'begin', display: 'anchor' },
-  { emoji: String.fromCodePoint(0x1F41C), word: 'ant',   blankIdx: 0, type: 'begin', display: 'ant' },
-  { emoji: String.fromCodePoint(0x1FA93), word: 'axe',   blankIdx: 0, type: 'begin', display: 'axe' },
-  { emoji: String.fromCodePoint(0x1F9B6), word: 'arm',   blankIdx: 0, type: 'begin', display: 'arm' },
-  { emoji: String.fromCodePoint(0x1F3A8), word: 'art',   blankIdx: 0, type: 'begin', display: 'art' },
-  { emoji: String.fromCodePoint(0x1F680), word: 'astronaut', blankIdx: 0, type: 'begin', display: 'astronaut' },
-  { emoji: String.fromCodePoint(0x1F9EA), word: 'acid',  blankIdx: 0, type: 'begin', display: 'acid' },
+  {emoji:"🫙",word:"jam",blankIdx:1,type:"middle"},
+  {emoji:"🚐",word:"van",blankIdx:1,type:"middle"},
+  {emoji:"🐱",word:"cat",blankIdx:1,type:"middle"},
+  {emoji:"🧢",word:"cap",blankIdx:1,type:"middle"},
+  {emoji:"🦇",word:"bat",blankIdx:1,type:"middle"},
+  {emoji:"🗺",word:"map",blankIdx:1,type:"middle"},
+  {emoji:"🛍",word:"bag",blankIdx:1,type:"middle"},
+  {emoji:"🚰",word:"tap",blankIdx:1,type:"middle"},
+  {emoji:"🐏",word:"ram",blankIdx:1,type:"middle"},
+  {emoji:"🦸",word:"man",blankIdx:1,type:"middle"},
+  {emoji:"🍎",word:"apple",blankIdx:0,type:"begin"},
+  {emoji:"⚓",word:"anchor",blankIdx:0,type:"begin"},
+  {emoji:"🐜",word:"ant",blankIdx:0,type:"begin"},
+  {emoji:"🪓",word:"axe",blankIdx:0,type:"begin"},
+  {emoji:"🦜",word:"arm",blankIdx:0,type:"begin"},
+  {emoji:"🎨",word:"art",blankIdx:0,type:"begin"},
+  {emoji:"🐊",word:"alligator",blankIdx:0,type:"begin"},
+  {emoji:"🦴",word:"acorn",blankIdx:0,type:"begin"}
 ];
-
-const CORRECT = 'a';
-const DISTRACTORS = ['e','i','o','u','b','d','s','t','m'];
+const CORRECT = "a";
+const DISTRACTORS = ["e","i","o","u","b","d","s","t","m"];
 const QSIZE = 10;
-
-/* ── phonics map: letter -> TTS-friendly sound spelling ── */
 const PHONICS = {
-  a:'aaa', e:'ehh', i:'ih', o:'aww', u:'uh',
-  b:'buh', c:'kuh', d:'duh', f:'fuh', g:'guh',
-  h:'huh', j:'juh', k:'kuh', l:'luh', m:'muh',
-  n:'nuh', p:'puh', r:'rr',  s:'sss', t:'tuh',
-  v:'vuh', w:'wuh', x:'ksss',y:'yuh', z:'zzz'
+  a:"aaa", e:"ehh", i:"ih", o:"aww", u:"uh",
+  b:"buh", c:"kuh", d:"duh", f:"fuh", g:"guh",
+  h:"huh", j:"juh", k:"kuh", l:"luh", m:"muh",
+  n:"nuh", p:"puh", r:"rr",  s:"sss", t:"tuh",
+  v:"vuh", w:"wuh", x:"ksss",y:"yuh", z:"zzz"
 };
 function phon(l){ return PHONICS[l.toLowerCase()] || l; }
 
-/* ========================================================
-   SPEECH ENGINE
-   Uses chained SpeechSynthesisUtterances for natural pauses.
-   Picks the best available voice each time.
-   ======================================================== */
-let _bestVoice = null;
+let _voice = null;
+let _voicesReady = false;
 
-function _pickVoice() {
+function initVoices() {
   const all = speechSynthesis.getVoices();
-  return (
-    all.find(v => /samantha/i.test(v.name))   ||
-    all.find(v => /karen/i.test(v.name))       ||
-    all.find(v => /moira/i.test(v.name))       ||
-    all.find(v => /tessa/i.test(v.name))       ||
-    all.find(v => /google us english/i.test(v.name)) ||
-    all.find(v => /microsoft zira/i.test(v.name))    ||
-    all.find(v => v.lang === 'en-US' && !v.localService) ||
-    all.find(v => v.lang === 'en-US')          ||
-    all.find(v => v.lang.startsWith('en'))     ||
-    all[0]
-  );
+  if (!all.length) return;
+  _voice = all.find(v => /samantha/i.test(v.name))
+    || all.find(v => /karen/i.test(v.name))
+    || all.find(v => /moira/i.test(v.name))
+    || all.find(v => /google us english/i.test(v.name))
+    || all.find(v => /microsoft zira/i.test(v.name))
+    || all.find(v => v.lang === "en-US" && !v.localService)
+    || all.find(v => v.lang === "en-US")
+    || all.find(v => v.lang.startsWith("en"))
+    || all[0];
+  _voicesReady = true;
+}
+if (typeof speechSynthesis !== "undefined") {
+  speechSynthesis.onvoiceschanged = initVoices;
+  setTimeout(initVoices, 100);
 }
 
-if (speechSynthesis.onvoiceschanged !== undefined) {
-  speechSynthesis.onvoiceschanged = () => { _bestVoice = _pickVoice(); };
-}
-setTimeout(() => { _bestVoice = _pickVoice(); }, 200);
-
-/* Cancel everything and speak a single utterance */
-function speak(text, { rate=0.88, pitch=1.3, vol=1.0, onend=null } = {}) {
+function speak(text, rate, pitch) {
   if (!window.speechSynthesis) return;
+  rate = rate || 0.88;
+  pitch = pitch || 1.3;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang   = 'en-US';
-  u.rate   = rate;
-  u.pitch  = pitch;
-  u.volume = vol;
-  u.voice  = _bestVoice || _pickVoice();
-  if (onend) u.onend = onend;
+  u.lang = "en-US";
+  u.rate = rate;
+  u.pitch = pitch;
+  u.volume = 1.0;
+  if (_voice) u.voice = _voice;
   speechSynthesis.speak(u);
 }
 
-/* Speak a list of {text,rate,pitch} segments back-to-back */
 function speakChain(parts, onDone) {
-  if (!window.speechSynthesis) return;
+  if (!window.speechSynthesis) { if (onDone) onDone(); return; }
   speechSynthesis.cancel();
-  let idx = 0;
+  let i = 0;
   function next() {
-    if (idx >= parts.length) { if (onDone) onDone(); return; }
-    const p = parts[idx++];
+    if (i >= parts.length) { if (onDone) onDone(); return; }
+    const p = parts[i++];
     const u = new SpeechSynthesisUtterance(p.text);
-    u.lang   = 'en-US';
-    u.rate   = p.rate  ?? 0.88;
-    u.pitch  = p.pitch ?? 1.3;
-    u.volume = p.vol   ?? 1.0;
-    u.voice  = _bestVoice || _pickVoice();
-    u.onend  = next;
+    u.lang = "en-US";
+    u.rate = p.rate || 0.88;
+    u.pitch = p.pitch || 1.3;
+    u.volume = 1.0;
+    if (_voice) u.voice = _voice;
+    u.onend = next;
     speechSynthesis.speak(u);
   }
   next();
 }
 
-/* ─── GAME STATE ─── */
-let queue, qIdx, cc, wc;
+let queue, qIdx, cc, wc, answered;
+let hoverTimeout = null;
 
 function shuffle(a) {
   const b = [...a];
-  for (let i = b.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [b[i], b[j]] = [b[j], b[i]];
+  for (let i = b.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [b[i],b[j]] = [b[j],b[i]];
   }
   return b;
 }
 
 function makeChoices() {
-  return shuffle([CORRECT, ...shuffle(DISTRACTORS).slice(0, 3)]);
+  return shuffle([CORRECT, ...shuffle(DISTRACTORS).slice(0,3)]);
 }
 
 function initGame() {
-  /* mix middle and begin words, pick QSIZE randomly */
   queue = shuffle(WORDS).slice(0, QSIZE);
   qIdx = cc = wc = 0;
+  answered = false;
   updateScore();
   renderWord(queue[0]);
-  setTimeout(() => {
+  const delay = _voicesReady ? 800 : 1400;
+  setTimeout(function() {
     speakChain([
-      { text: "Let's find the letter A!", rate: 0.82, pitch: 1.42 },
-      { text: "Some words start with A.", rate: 0.82, pitch: 1.35 },
-      { text: "Some words have A in the middle.", rate: 0.82, pitch: 1.35 },
-      { text: "Listen carefully and click the right letter!", rate: 0.85, pitch: 1.38 },
+      {text:"Let's find the letter A!", rate:0.82, pitch:1.42},
+      {text:"Some words start with A.", rate:0.82, pitch:1.35},
+      {text:"Some words have A in the middle!", rate:0.82, pitch:1.35},
+      {text:"Listen carefully and click the right letter!", rate:0.85, pitch:1.38}
     ]);
-  }, 700);
+  }, delay);
 }
 
-/* ─── RENDER ─── */
 function renderWord(item) {
-  document.getElementById('pictureBox').textContent = item.emoji;
+  answered = false;
+  document.getElementById("pictureBox").textContent = item.emoji;
   buildLetterBoxes(item);
   buildWordLabel(item);
   buildChoices(item);
-
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback hidden';
-  fb.innerHTML = '';
-
+  const fb = document.getElementById("feedback");
+  fb.className = "feedback hidden";
+  fb.innerHTML = "";
   const pct = Math.round((qIdx / QSIZE) * 100);
-  document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent =
-    'Word ' + (qIdx + 1) + ' of ' + QSIZE;
-
-  setTimeout(() => speakPrompt(item), 400);
+  document.getElementById("progressBar").style.width = pct + "%";
+  document.getElementById("progressLabel").textContent = "Word " + (qIdx+1) + " of " + QSIZE;
+  const badge = document.getElementById("positionBadge");
+  if (item.type === "begin") {
+    badge.textContent = "👉 Beginning Sound";
+    badge.className = "position-badge badge-begin";
+  } else {
+    badge.textContent = "👉 Middle Sound";
+    badge.className = "position-badge badge-middle";
+  }
+  setTimeout(function() { speakPrompt(item); }, 400);
 }
 
 function buildLetterBoxes(item) {
-  const wrap = document.getElementById('letterBoxes');
-  wrap.innerHTML = '';
+  const wrap = document.getElementById("letterBoxes");
+  wrap.innerHTML = "";
   for (let i = 0; i < item.word.length; i++) {
-    const d = document.createElement('div');
-    d.className = 'letter-box ' + (i === item.blankIdx ? 'blank' : 'given');
-    d.id = 'box' + i;
-    d.textContent = i === item.blankIdx ? '?' : item.word[i];
+    const d = document.createElement("div");
+    d.className = "letter-box " + (i === item.blankIdx ? "blank" : "given");
+    d.id = "box" + i;
+    d.textContent = i === item.blankIdx ? "?" : item.word[i];
     wrap.appendChild(d);
   }
 }
 
 function buildWordLabel(item) {
-  document.getElementById('wordLabel').textContent =
-    item.word.split('').map((c, i) => i === item.blankIdx ? '_' : c).join('  ');
+  document.getElementById("wordLabel").textContent =
+    item.word.split("").map(function(c,i){ return i === item.blankIdx ? "_" : c; }).join("  ");
 }
 
 function buildChoices(item) {
-  const wrap = document.getElementById('choices');
-  wrap.innerHTML = '';
-  makeChoices().forEach(l => {
-    const b = document.createElement('button');
-    b.className = 'choice-btn' + (l === CORRECT ? ' correct-letter' : '');
+  const wrap = document.getElementById("choices");
+  wrap.innerHTML = "";
+  const letters = makeChoices();
+  letters.forEach(function(l) {
+    const b = document.createElement("button");
+    b.className = "choice-btn" + (l === CORRECT ? " correct-letter" : "");
     b.textContent = l;
-    b.setAttribute('aria-label', 'letter ' + l);
-    b.onclick         = () => selectLetter(l, b, item);
-    b.onmouseenter    = () => { if (!b.disabled) speak(phon(l), { rate: 0.72, pitch: 1.42 }); };
-    b.addEventListener('touchstart', () => { if (!b.disabled) speak(phon(l), { rate: 0.72, pitch: 1.42 }); }, { passive: true });
+    b.setAttribute("aria-label", "letter " + l);
+    b.addEventListener("click", function() { selectLetter(l, b, item); });
+    b.addEventListener("mouseenter", function() {
+      if (b.disabled) return;
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(function() { speak(phon(l), 0.72, 1.42); }, 80);
+    });
+    b.addEventListener("touchstart", function(e) {
+      if (b.disabled) return;
+      clearTimeout(hoverTimeout);
+      speak(phon(l), 0.72, 1.42);
+    }, {passive:true});
     wrap.appendChild(b);
   });
 }
 
-/* ─── PROMPTS ─── */
 function speakPrompt(item) {
-  const pos = item.type === 'begin' ? 'beginning' : 'middle';
+  const pos = item.type === "begin" ? "beginning" : "middle";
   speakChain([
-    { text: 'Click on the letter', rate: 0.82, pitch: 1.38 },
-    { text: 'that makes the ' + pos + ' sound', rate: 0.80, pitch: 1.35 },
-    { text: 'in the word', rate: 0.82, pitch: 1.35 },
-    { text: item.display || item.word, rate: 0.70, pitch: 1.45 },
+    {text:"Click on the letter", rate:0.82, pitch:1.38},
+    {text:"that makes the " + pos + " sound", rate:0.80, pitch:1.35},
+    {text:"in the word", rate:0.82, pitch:1.35},
+    {text:item.word, rate:0.70, pitch:1.45}
   ]);
 }
 
 function speakInstructions() {
   speakChain([
-    { text: 'Look at the picture!', rate: 0.82, pitch: 1.42 },
-    { text: 'Find the letter A', rate: 0.80, pitch: 1.35 },
-    { text: 'at the beginning or in the middle of the word!', rate: 0.82, pitch: 1.32 },
+    {text:"Look at the picture!", rate:0.82, pitch:1.42},
+    {text:"Find the letter A", rate:0.80, pitch:1.35},
+    {text:"at the beginning or middle of the word!", rate:0.82, pitch:1.32}
   ]);
 }
 
-/* ─── SELECT ─── */
 function selectLetter(letter, btn, item) {
-  /* if this button is already disabled (wrong pick), ignore */
   if (btn.disabled) return;
-
-  const box = document.getElementById('box' + item.blankIdx);
-  const fb  = document.getElementById('feedback');
+  if (answered) return;
+  const box = document.getElementById("box" + item.blankIdx);
+  const fb = document.getElementById("feedback");
   box.textContent = letter;
 
   if (letter === CORRECT) {
-    /* ── CORRECT ── */
+    answered = true;
     cc++;
     disableAll();
-    box.className = 'letter-box filled-correct';
-    btn.className = 'choice-btn selected-correct';
-
-    const msgs = [
-      "Yes! That's the letter A! Wonderful!",
+    box.className = "letter-box filled-correct";
+    btn.className = "choice-btn selected-correct";
+    const praises = [
+      "Yes! That is the letter A! Wonderful!",
       "Woo hoo! You found the A! Great job!",
       "Super duper! A is exactly right!",
       "Yay! You got it! The letter A!",
-      "Hooray! Brilliant work! That's the A!",
+      "Hooray! Brilliant work! That is the A!"
     ];
-    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+    const msg = praises[Math.floor(Math.random() * praises.length)];
     fb.textContent = msg;
-    fb.className = 'feedback correct-fb';
-
-    speakChain([
-      { text: msg, rate: 0.88, pitch: 1.42 },
-    ]);
+    fb.className = "feedback correct-fb";
+    speakChain([{text:msg, rate:0.88, pitch:1.42}]);
     updateScore();
     setTimeout(advanceWord, 2400);
-
   } else {
-    /* ── WRONG ── */
     wc++;
-    box.className = 'letter-box filled-wrong';
-    btn.className = 'choice-btn selected-wrong';
-    btn.disabled  = true;
-
-    /* build the wrongly-blended word */
-    const letters = item.word.split('');
+    box.className = "letter-box filled-wrong";
+    btn.className = "choice-btn selected-wrong";
+    btn.disabled = true;
+    const letters = item.word.split("");
     letters[item.blankIdx] = letter;
-    const blended = letters.join('');
-
-    fb.innerHTML = 'Hmm... <b>' + blended + '</b>? That doesn't sound right! Try again!';
-    fb.className = 'feedback wrong-fb';
+    const blended = letters.join("");
+    fb.innerHTML = "Hmm... <b>" + blended + "</b>? That does not sound right! Try again!";
+    fb.className = "feedback wrong-fb";
     updateScore();
-
-    /* speak: each sound separately, then blend, then encourage */
-    const soundParts = item.word.split('').map((c, i) => ({
-      text: phon(i === item.blankIdx ? letter : c),
-      rate: 0.68, pitch: 1.38
-    }));
-
-    speakChain([
-      ...soundParts,
-      { text: blended, rate: 0.72, pitch: 1.2 },
-      { text: "Hmm! That doesn't sound quite right.", rate: 0.85, pitch: 1.3 },
-      { text: "Let's try again!", rate: 0.9, pitch: 1.45 },
-    ], () => {
-      /* after speech: reset box + re-prompt */
-      box.className   = 'letter-box blank';
-      box.textContent = '?';
-      fb.className    = 'feedback try-fb';
-      fb.textContent  = 'Try again!';
-      setTimeout(() => speakPrompt(item), 300);
+    const soundParts = item.word.split("").map(function(c, i) {
+      return {text: phon(i === item.blankIdx ? letter : c), rate:0.68, pitch:1.38};
+    });
+    speakChain(soundParts.concat([
+      {text:blended, rate:0.72, pitch:1.2},
+      {text:"Hmm! That does not sound quite right.", rate:0.85, pitch:1.3},
+      {text:"Let us try again!", rate:0.9, pitch:1.45}
+    ]), function() {
+      box.className = "letter-box blank";
+      box.textContent = "?";
+      fb.className = "feedback try-fb";
+      fb.textContent = "Try again! 🤔";
+      setTimeout(function() { speakPrompt(item); }, 300);
     });
   }
 }
 
 function disableAll() {
-  document.querySelectorAll('.choice-btn').forEach(b => { b.disabled = true; });
+  document.querySelectorAll(".choice-btn").forEach(function(b) { b.disabled = true; });
 }
 
 function advanceWord() {
@@ -412,76 +366,74 @@ function advanceWord() {
   renderWord(queue[qIdx]);
 }
 
-/* ─── SCORE ─── */
 function updateScore() {
-  document.getElementById('scoreCorrect').textContent = '\u2705 ' + cc + ' correct';
-  document.getElementById('scoreWrong').textContent   = '\u274C ' + wc + ' wrong';
+  document.getElementById("scoreCorrect").textContent = "✅ " + cc + " correct";
+  document.getElementById("scoreWrong").textContent = "❌ " + wc + " wrong";
 }
 
-/* ─── END GAME ─── */
 function endGame() {
   launchConfetti();
   const pct = Math.round((cc / QSIZE) * 100);
   let em, ti, msg;
-  if (pct === 100) { em = '\u{1F3C6}'; ti = 'Perfect Score!';   msg = 'You found every single letter A! You are a SUPERSTAR!'; }
-  else if (pct >= 70){ em = '\u2B50'; ti = 'Amazing Job!';     msg = 'You found the letter A ' + cc + ' out of ' + QSIZE + ' times! Fantastic!'; }
-  else               { em = '\u{1F4AA}'; ti = 'Keep Going!';   msg = 'You got ' + cc + ' out of ' + QSIZE + '. Keep practicing, you can do it!'; }
-  document.getElementById('overlayEmoji').textContent = em;
-  document.getElementById('overlayTitle').textContent = ti;
-  document.getElementById('overlayMsg').textContent   = msg;
-  document.getElementById('finalCorrect').textContent = '\u2705 ' + cc + ' correct';
-  document.getElementById('finalWrong').textContent   = '\u274C ' + wc + ' wrong';
-  document.getElementById('overlay').classList.add('show');
-  setTimeout(() => speakChain([
-    { text: ti, rate: 0.85, pitch: 1.45 },
-    { text: msg, rate: 0.85, pitch: 1.35 },
-  ]), 500);
+  if (pct === 100) { em = "🏆"; ti = "Perfect Score!"; msg = "You found every single letter A! You are a SUPERSTAR!"; }
+  else if (pct >= 70) { em = "⭐"; ti = "Amazing Job!"; msg = "You found the letter A " + cc + " out of " + QSIZE + " times! Fantastic!"; }
+  else { em = "💪"; ti = "Keep Going!"; msg = "You got " + cc + " out of " + QSIZE + ". Keep practicing, you can do it!"; }
+  document.getElementById("overlayEmoji").textContent = em;
+  document.getElementById("overlayTitle").textContent = ti;
+  document.getElementById("overlayMsg").textContent = msg;
+  document.getElementById("finalCorrect").textContent = "✅ " + cc + " correct";
+  document.getElementById("finalWrong").textContent = "❌ " + wc + " wrong";
+  document.getElementById("overlay").classList.add("show");
+  setTimeout(function() {
+    speakChain([
+      {text:ti, rate:0.85, pitch:1.45},
+      {text:msg, rate:0.85, pitch:1.35}
+    ]);
+  }, 500);
 }
 
 function restartGame() {
-  document.getElementById('overlay').classList.remove('show');
+  document.getElementById("overlay").classList.remove("show");
   stopConfetti();
   initGame();
 }
 
-/* ─── CONFETTI ─── */
 let confAnim;
-const cvs = document.getElementById('confetti');
-const ctx  = cvs.getContext('2d');
-let pcs    = [];
+const cvs = document.getElementById("confetti");
+const ctx = cvs.getContext("2d");
+let pcs = [];
 function rsz() { cvs.width = innerWidth; cvs.height = innerHeight; }
-window.addEventListener('resize', rsz); rsz();
-const COLS = ['#FF6B9D','#FFD93D','#6BCB77','#4D96FF','#C77DFF','#FF9A3C'];
+window.addEventListener("resize", rsz); rsz();
+const COLS = ["#FF6B9D","#FFD93D","#6BCB77","#4D96FF","#C77DFF","#FF9A3C"];
 function launchConfetti() {
-  pcs = Array.from({length:220}, () => ({
-    x: Math.random() * cvs.width,
-    y: Math.random() * cvs.height - cvs.height,
-    w: 7 + Math.random() * 9, h: 11 + Math.random() * 10,
-    color: COLS[Math.floor(Math.random() * COLS.length)],
-    rot: Math.random() * 360,
-    vx: (Math.random() - .5) * 4,
-    vy: 3 + Math.random() * 4.5,
-    vr: (Math.random() - .5) * 7,
-  }));
+  pcs = [];
+  for (let i = 0; i < 220; i++) {
+    pcs.push({
+      x: Math.random()*cvs.width, y: Math.random()*cvs.height - cvs.height,
+      w: 7+Math.random()*9, h: 11+Math.random()*10,
+      color: COLS[Math.floor(Math.random()*COLS.length)],
+      rot: Math.random()*360, vx:(Math.random()-.5)*4,
+      vy: 3+Math.random()*4.5, vr:(Math.random()-.5)*7
+    });
+  }
   animConf();
 }
 function animConf() {
-  ctx.clearRect(0, 0, cvs.width, cvs.height);
-  pcs.forEach(p => {
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  pcs.forEach(function(p) {
     ctx.save();
-    ctx.translate(p.x + p.w / 2, p.y + p.h / 2);
-    ctx.rotate(p.rot * Math.PI / 180);
+    ctx.translate(p.x+p.w/2, p.y+p.h/2);
+    ctx.rotate(p.rot*Math.PI/180);
     ctx.fillStyle = p.color;
-    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
     ctx.restore();
     p.x += p.vx; p.y += p.vy; p.rot += p.vr;
   });
-  pcs = pcs.filter(p => p.y < cvs.height + 20);
+  pcs = pcs.filter(function(p){ return p.y < cvs.height+20; });
   if (pcs.length > 0) confAnim = requestAnimationFrame(animConf);
 }
-function stopConfetti() { cancelAnimationFrame(confAnim); ctx.clearRect(0, 0, cvs.width, cvs.height); }
+function stopConfetti() { cancelAnimationFrame(confAnim); ctx.clearRect(0,0,cvs.width,cvs.height); }
 
-/* ─── START ─── */
 initGame();
 </script>
 </body>
