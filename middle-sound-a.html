@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Middle Sound A</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
+    :root {
+      --pink:#FF6B9D; --yellow:#FFD93D; --green:#6BCB77;
+      --blue:#4D96FF; --purple:#C77DFF; --orange:#FF9A3C; --red:#FF5252;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FFF0F8 0%,#FFF9E6 50%,#F0F8FF 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px 16px 40px;overflow-x:hidden;}
+    .card{background:white;border-radius:32px;padding:32px 36px 36px;max-width:660px;width:100%;box-shadow:0 10px 40px rgba(255,107,157,.15),0 4px 12px rgba(0,0,0,.08);}
+    header{text-align:center;margin-bottom:24px;}
+    .header-emoji{font-size:52px;display:block;animation:bounce 1.6s infinite;margin-bottom:4px;}
+    header h1{font-family:'Fredoka One',cursive;font-size:2.2rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;margin-bottom:6px;}
+    .subtitle{font-size:1.05rem;color:#777;font-weight:700;}
+    .btn-speak-inst{background:none;border:none;font-size:1.6rem;cursor:pointer;vertical-align:middle;transition:transform .2s;}
+    .btn-speak-inst:hover{transform:scale(1.25);}
+    .progress-wrap{background:#EEE;border-radius:99px;height:14px;margin-bottom:6px;overflow:hidden;}
+    .progress-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--orange));transition:width .55s cubic-bezier(.34,1.56,.64,1);}
+    .progress-label{text-align:right;font-size:.85rem;color:#999;font-weight:700;margin-bottom:26px;}
+    .word-area{display:flex;align-items:center;justify-content:center;gap:32px;margin-bottom:30px;flex-wrap:wrap;}
+    .picture-box{font-size:96px;line-height:1;filter:drop-shadow(2px 4px 8px rgba(0,0,0,.12));animation:popIn .45s cubic-bezier(.34,1.56,.64,1);}
+    .letter-boxes{display:flex;gap:10px;align-items:center;}
+    .letter-box{width:82px;height:92px;border-radius:18px;border:4px solid #DDD;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:2.8rem;background:#FAFAFA;transition:border-color .3s,background .3s;}
+    .letter-box.given{color:#444;border-color:var(--blue);background:#EEF6FF;}
+    .letter-box.blank{border-color:var(--pink);border-style:dashed;background:#FFF0F6;font-size:2rem;color:#CCC;}
+    .letter-box.filled-correct{border-color:var(--green);border-style:solid;background:#EDFFF1;color:var(--green);animation:pop .4s cubic-bezier(.34,1.56,.64,1);}
+    .letter-box.filled-wrong{border-color:var(--red);border-style:solid;background:#FFF0F0;color:var(--red);animation:shake .45s;}
+    .word-label{text-align:center;font-family:'Fredoka One',cursive;font-size:1.2rem;color:#AAA;margin-bottom:28px;letter-spacing:2px;}
+    .choice-label{text-align:center;font-size:1.05rem;font-weight:800;color:var(--purple);margin-bottom:14px;}
+    .choices{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:30px;}
+    .choice-btn{width:72px;height:72px;border-radius:18px;border:none;font-family:'Fredoka One',cursive;font-size:2rem;cursor:pointer;color:white;box-shadow:0 5px 0 rgba(0,0,0,.2);transition:transform .12s,box-shadow .12s,opacity .2s;background:var(--blue);}
+    .choice-btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.2);}
+    .choice-btn:disabled{opacity:.45;cursor:default;transform:none;}
+    .choice-btn.correct-letter{background:var(--pink);}
+    .choice-btn.selected-correct{background:var(--green);box-shadow:0 5px 0 #2e7a3e;}
+    .choice-btn.selected-wrong{background:var(--red);box-shadow:0 5px 0 #990000;}
+    .feedback{min-height:52px;text-align:center;font-family:'Fredoka One',cursive;font-size:1.45rem;border-radius:16px;padding:10px 20px;margin-bottom:20px;transition:opacity .35s;}
+    .feedback.hidden{opacity:0;pointer-events:none;}
+    .feedback.correct-fb{background:#EDFFF1;color:#2A7A3A;}
+    .feedback.wrong-fb{background:#FFF0F0;color:#CC0000;}
+    .score-row{display:flex;justify-content:center;gap:14px;}
+    .score-pill{padding:6px 18px;border-radius:99px;font-weight:800;font-size:.95rem;}
+    .correct-pill{background:#EDFFF1;color:#2A7A3A;}
+    .wrong-pill{background:#FFF0F0;color:#CC0000;}
+    .btn-next{display:none;margin:18px auto 0;padding:14px 46px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--yellow),var(--orange));color:white;font-family:'Fredoka One',cursive;font-size:1.35rem;cursor:pointer;box-shadow:0 6px 0 #c07800;transition:transform .12s,box-shadow .12s;}
+    .btn-next.show{display:block;}
+    .btn-next:active{transform:translateY(4px);box-shadow:0 2px 0 #c07800;}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.93);z-index:100;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;animation:fadeIn .4s;}
+    .overlay.show{display:flex;}
+    .overlay .big-emoji{font-size:96px;animation:bounce 1s infinite;}
+    .overlay h2{font-family:'Fredoka One',cursive;font-size:2.6rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;}
+    .overlay p{font-size:1.15rem;color:#555;font-weight:700;}
+    .btn-restart{margin-top:8px;padding:16px 48px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--pink),var(--purple));color:white;font-family:'Fredoka One',cursive;font-size:1.35rem;cursor:pointer;box-shadow:0 6px 0 #9a00cc;}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.28)}100%{transform:scale(1)}}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+    @keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    #confetti{position:fixed;inset:0;pointer-events:none;z-index:99;}
+    @media(max-width:480px){header h1{font-size:1.7rem;}.letter-box{width:66px;height:76px;font-size:2.1rem;}.picture-box{font-size:76px;}.choice-btn{width:58px;height:58px;font-size:1.6rem;}}
+  </style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="overlay" id="overlay">
+  <div class="big-emoji" id="overlayEmoji">&#x1F3C6;</div>
+  <h2 id="overlayTitle">Amazing!</h2>
+  <p id="overlayMsg">You finished!</p>
+  <div class="score-row" style="margin-top:4px">
+    <span class="score-pill correct-pill" id="finalCorrect">&#x2705; 0 correct</span>
+    <span class="score-pill wrong-pill" id="finalWrong">&#x274C; 0 wrong</span>
+  </div>
+  <button class="btn-restart" onclick="restartGame()">&#x1F504; Play Again!</button>
+</div>
+<div class="card">
+  <header>
+    <span class="header-emoji">&#x1F34E;</span>
+    <h1>Middle Sound <span style="color:var(--orange)">A</span>!</h1>
+    <p class="subtitle">Click the letter that goes in the middle!
+      <button class="btn-speak-inst" onclick="speakInstructions()" title="Hear instructions">&#x1F50A;</button>
+    </p>
+  </header>
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+  <div class="progress-label" id="progressLabel">Word 1 of 8</div>
+  <div class="word-area">
+    <div class="picture-box" id="pictureBox">&#x1F353;</div>
+    <div class="letter-boxes" id="letterBoxes"></div>
+  </div>
+  <div class="word-label" id="wordLabel">_ _ _</div>
+  <div class="choice-label">Which letter makes the middle sound? &#x1F447;</div>
+  <div class="choices" id="choices"></div>
+  <div class="feedback hidden" id="feedback"></div>
+  <button class="btn-next" id="btnNext" onclick="nextWord()">Next Word &#x27A1;&#xFE0F;</button>
+  <div class="score-row">
+    <span class="score-pill correct-pill" id="scoreCorrect">&#x2705; 0 correct</span>
+    <span class="score-pill wrong-pill" id="scoreWrong">&#x274C; 0 wrong</span>
+  </div>
+</div>
+<script>
+const WORDS=[
+  {emoji:'\u{1FAD9}',word:'jam',hint:'a jar of jam'},
+  {emoji:'\u{1F690}',word:'van',hint:'a van'},
+  {emoji:'\u{1F431}',word:'cat',hint:'a cat'},
+  {emoji:'\u{1F9E2}',word:'cap',hint:'a cap'},
+  {emoji:'\u{1F987}',word:'bat',hint:'a bat'},
+  {emoji:'\u{1F5FA}',word:'map',hint:'a map'},
+  {emoji:'\u{1F6CD}',word:'bag',hint:'a bag'},
+  {emoji:'\u{1F6B0}',word:'tap',hint:'a tap'},
+  {emoji:'\u{1F40F}',word:'ram',hint:'a ram'},
+  {emoji:'\u{1F9B8}',word:'man',hint:'a man'}
+];
+const BLANK_IDX=1,CORRECT='a';
+const DIST=['e','i','o','u','b','d','m','s','t'];
+const QSIZE=8;
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function makeChoices(){return shuffle([CORRECT,...shuffle(DIST).slice(0,3)]);}
+let queue,qIdx,cc,wc,answered;
+function initGame(){queue=shuffle(WORDS).slice(0,QSIZE);qIdx=cc=wc=0;answered=false;updateScore();renderWord(queue[0]);setTimeout(()=>speak('Welcome! Look at the picture and click the letter A to complete the word!',0.85,1.3),600);}
+function renderWord(item){
+  answered=false;
+  document.getElementById('pictureBox').textContent=item.emoji;
+  const boxes=document.getElementById('letterBoxes');boxes.innerHTML='';
+  for(let i=0;i<item.word.length;i++){const d=document.createElement('div');d.className='letter-box '+(i===BLANK_IDX?'blank':'given');d.id='box'+i;d.textContent=i===BLANK_IDX?'?':item.word[i];boxes.appendChild(d);}
+  document.getElementById('wordLabel').textContent=item.word.split('').map((c,i)=>i===BLANK_IDX?'_':c).join('  ');
+  const ch=document.getElementById('choices');ch.innerHTML='';
+  makeChoices().forEach(l=>{const b=document.createElement('button');b.className='choice-btn'+(l===CORRECT?' correct-letter':'');b.textContent=l;b.setAttribute('aria-label','letter '+l);b.onclick=()=>selectLetter(l,b);ch.appendChild(b);});
+  const fb=document.getElementById('feedback');fb.className='feedback hidden';fb.textContent='';
+  document.getElementById('btnNext').classList.remove('show');
+  const pct=Math.round((qIdx/QSIZE)*100);
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressLabel').textContent='Word '+(qIdx+1)+' of '+QSIZE;
+  setTimeout(()=>speakPrompt(item),300);
+}
+function selectLetter(letter,btn){
+  if(answered)return;answered=true;
+  document.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
+  const box=document.getElementById('box'+BLANK_IDX);
+  const fb=document.getElementById('feedback');
+  const item=queue[qIdx];
+  box.textContent=letter;
+  const CM=['Star! Yes! The letter A! Great job!','Awesome! A is right!','Super! You found the A!','Wow! Perfect!','Amazing! That is the A!'];
+  const WM=['Oops! The missing letter is A! Try the next one!','Not quite! It was A. You can do it!','Almost! The middle sound is A!'];
+  if(letter===CORRECT){cc++;box.className='letter-box filled-correct';btn.className='choice-btn selected-correct';const msg=CM[Math.floor(Math.random()*CM.length)];fb.textContent=msg;fb.className='feedback correct-fb';speak(msg,0.9,1.35);}
+  else{wc++;box.className='letter-box filled-wrong';btn.className='choice-btn selected-wrong';document.querySelectorAll('.choice-btn').forEach(b=>{if(b.textContent===CORRECT)b.style.outline='4px solid var(--green)';});const msg=WM[Math.floor(Math.random()*WM.length)];fb.textContent=msg;fb.className='feedback wrong-fb';speak(msg,0.88,1.2);}
+  updateScore();document.getElementById('btnNext').classList.add('show');
+  setTimeout(()=>{if(answered)nextWord();},2600);
+}
+function nextWord(){qIdx++;if(qIdx>=QSIZE){endGame();return;}renderWord(queue[qIdx]);}
+function updateScore(){document.getElementById('scoreCorrect').textContent='✅ '+cc+' correct';document.getElementById('scoreWrong').textContent='❌ '+wc+' wrong';}
+function endGame(){
+  launchConfetti();
+  const pct=Math.round((cc/QSIZE)*100);
+  let em,ti,msg;
+  if(pct===100){em='🏆';ti='Perfect Score!';msg='You got every letter A right!';}
+  else if(pct>=75){em='🌟';ti='Amazing Job!';msg='You found the A '+cc+' out of '+QSIZE+' times!';}
+  else{em='💪';ti='Keep Practicing!';msg='You got '+cc+' out of '+QSIZE+'. Try again!';}
+  document.getElementById('overlayEmoji').textContent=em;
+  document.getElementById('overlayTitle').textContent=ti;
+  document.getElementById('overlayMsg').textContent=msg;
+  document.getElementById('finalCorrect').textContent='✅ '+cc+' correct';
+  document.getElementById('finalWrong').textContent='❌ '+wc+' wrong';
+  document.getElementById('overlay').classList.add('show');
+  speak(ti+' '+msg,0.85,1.35);
+}
+function restartGame(){document.getElementById('overlay').classList.remove('show');stopConfetti();initGame();}
+function speak(text,rate=0.88,pitch=1.25){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=rate;u.pitch=pitch;const vs=speechSynthesis.getVoices();const v=vs.find(v=>/samantha|zoe|karen|moira|tessa|susan/i.test(v.name))||vs.find(v=>v.lang.startsWith('en'))||vs[0];if(v)u.voice=v;speechSynthesis.speak(u);}
+function speakInstructions(){speak('Look at the picture! Click the letter A to fill in the missing middle sound!',0.85,1.3);}
+function speakPrompt(item){speak('What is the middle sound? '+item.hint,0.8,1.3);}
+let confAnim;const canvas=document.getElementById('confetti');const ctx=canvas.getContext('2d');let pieces=[];
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize',resize);resize();
+const COLS=['#FF6B9D','#FFD93D','#6BCB77','#4D96FF','#C77DFF','#FF9A3C'];
+function launchConfetti(){pieces=[];for(let i=0;i<200;i++){pieces.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,w:7+Math.random()*9,h:12+Math.random()*9,color:COLS[Math.floor(Math.random()*COLS.length)],rot:Math.random()*360,vx:(Math.random()-.5)*4,vy:3+Math.random()*4,vr:(Math.random()-.5)*6});}animC();}
+function animC(){ctx.clearRect(0,0,canvas.width,canvas.height);pieces.forEach(p=>{ctx.save();ctx.translate(p.x+p.w/2,p.y+p.h/2);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;});pieces=pieces.filter(p=>p.y<canvas.height+20);if(pieces.length>0)confAnim=requestAnimationFrame(animC);}
+function stopConfetti(){cancelAnimationFrame(confAnim);ctx.clearRect(0,0,canvas.width,canvas.height);}
+if(speechSynthesis.onvoiceschanged!==undefined)speechSynthesis.onvoiceschanged=()=>{};
+initGame();
+</script>
+</body>
+</html>
