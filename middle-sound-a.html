@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Middle Sound A</title>
+  <title>Beginning and Middle Sound A</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
     :root {
@@ -12,519 +12,477 @@
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FFF0F8 0%,#FFF9E6 50%,#F0F8FF 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px 16px 40px;overflow-x:hidden;}
-    .card{background:white;border-radius:32px;padding:32px 36px 36px;max-width:660px;width:100%;box-shadow:0 10px 40px rgba(255,107,157,.15),0 4px 12px rgba(0,0,0,.08);}
-    header{text-align:center;margin-bottom:24px;}
+    .card{background:white;border-radius:32px;padding:32px 36px 36px;max-width:680px;width:100%;box-shadow:0 10px 40px rgba(255,107,157,.15),0 4px 12px rgba(0,0,0,.08);}
+    header{text-align:center;margin-bottom:20px;}
     .header-emoji{font-size:52px;display:block;animation:bounce 1.6s infinite;margin-bottom:4px;}
-    header h1{font-family:'Fredoka One',cursive;font-size:2.2rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;margin-bottom:6px;}
-    .subtitle{font-size:1.05rem;color:#777;font-weight:700;}
-    .btn-speak-inst{background:none;border:none;font-size:1.6rem;cursor:pointer;vertical-align:middle;transition:transform .2s;}
+    header h1{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;margin-bottom:4px;line-height:1.2;}
+    .subtitle{font-size:1rem;color:#777;font-weight:700;}
+    .btn-speak-inst{background:none;border:none;font-size:1.5rem;cursor:pointer;vertical-align:middle;transition:transform .2s;}
     .btn-speak-inst:hover{transform:scale(1.25);}
+    .badge{display:inline-block;padding:3px 12px;border-radius:99px;font-size:.8rem;font-weight:800;margin-left:8px;vertical-align:middle;}
+    .badge-middle{background:#FFE0EE;color:#CC2266;}
+    .badge-begin{background:#E0F0FF;color:#1155CC;}
     .progress-wrap{background:#EEE;border-radius:99px;height:14px;margin-bottom:6px;overflow:hidden;}
     .progress-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--orange));transition:width .55s cubic-bezier(.34,1.56,.64,1);}
-    .progress-label{text-align:right;font-size:.85rem;color:#999;font-weight:700;margin-bottom:26px;}
-    .word-area{display:flex;align-items:center;justify-content:center;gap:32px;margin-bottom:30px;flex-wrap:wrap;}
-    .picture-box{font-size:96px;line-height:1;filter:drop-shadow(2px 4px 8px rgba(0,0,0,.12));animation:popIn .45s cubic-bezier(.34,1.56,.64,1);}
+    .progress-label{text-align:right;font-size:.85rem;color:#999;font-weight:700;margin-bottom:22px;}
+    .word-area{display:flex;align-items:center;justify-content:center;gap:28px;margin-bottom:24px;flex-wrap:wrap;}
+    .picture-box{font-size:92px;line-height:1;filter:drop-shadow(2px 4px 8px rgba(0,0,0,.12));animation:popIn .45s cubic-bezier(.34,1.56,.64,1);}
     .letter-boxes{display:flex;gap:10px;align-items:center;}
-    .letter-box{width:82px;height:92px;border-radius:18px;border:4px solid #DDD;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:2.8rem;background:#FAFAFA;transition:border-color .3s,background .3s;}
+    .letter-box{width:80px;height:90px;border-radius:18px;border:4px solid #DDD;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:2.8rem;background:#FAFAFA;transition:border-color .3s,background .3s;}
     .letter-box.given{color:#444;border-color:var(--blue);background:#EEF6FF;}
     .letter-box.blank{border-color:var(--pink);border-style:dashed;background:#FFF0F6;font-size:2rem;color:#CCC;}
     .letter-box.filled-correct{border-color:var(--green);border-style:solid;background:#EDFFF1;color:var(--green);animation:pop .4s cubic-bezier(.34,1.56,.64,1);}
     .letter-box.filled-wrong{border-color:var(--red);border-style:solid;background:#FFF0F0;color:var(--red);animation:shake .45s;}
-    .word-label{text-align:center;font-family:'Fredoka One',cursive;font-size:1.2rem;color:#AAA;margin-bottom:28px;letter-spacing:2px;}
-    .choice-label{text-align:center;font-size:1.05rem;font-weight:800;color:var(--purple);margin-bottom:14px;}
-    .choices{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:30px;}
-    .choice-btn{width:72px;height:72px;border-radius:18px;border:none;font-family:'Fredoka One',cursive;font-size:2rem;cursor:pointer;color:white;box-shadow:0 5px 0 rgba(0,0,0,.2);transition:transform .12s,box-shadow .12s,opacity .2s;background:var(--blue);}
-    .choice-btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.2);}
-    .choice-btn:disabled{opacity:.45;cursor:default;transform:none;}
+    .word-label{text-align:center;font-family:'Fredoka One',cursive;font-size:1.15rem;color:#AAA;margin-bottom:22px;letter-spacing:3px;}
+    .choice-label{text-align:center;font-size:1rem;font-weight:800;color:var(--purple);margin-bottom:12px;}
+    .choices{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
+    .choice-btn{width:74px;height:74px;border-radius:18px;border:none;font-family:'Fredoka One',cursive;font-size:2.1rem;cursor:pointer;color:white;box-shadow:0 5px 0 rgba(0,0,0,.22);transition:transform .15s,box-shadow .15s,background .2s;background:var(--blue);}
+    .choice-btn:hover:not(:disabled){transform:translateY(-5px) scale(1.1);box-shadow:0 10px 0 rgba(0,0,0,.18);}
+    .choice-btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.2);}
+    .choice-btn:disabled{opacity:.38;cursor:default;transform:none !important;box-shadow:0 2px 0 rgba(0,0,0,.1);}
     .choice-btn.correct-letter{background:var(--pink);}
-    .choice-btn.selected-correct{background:var(--green);box-shadow:0 5px 0 #2e7a3e;}
-    .choice-btn.selected-wrong{background:var(--red);box-shadow:0 5px 0 #990000;}
-    .feedback{min-height:52px;text-align:center;font-family:'Fredoka One',cursive;font-size:1.45rem;border-radius:16px;padding:10px 20px;margin-bottom:20px;transition:opacity .35s;}
+    .choice-btn.selected-correct{background:var(--green) !important;box-shadow:0 5px 0 #2e7a3e;}
+    .choice-btn.selected-wrong{background:var(--red) !important;box-shadow:0 5px 0 #990000;}
+    .feedback{min-height:54px;text-align:center;font-family:'Fredoka One',cursive;font-size:1.3rem;border-radius:16px;padding:10px 20px;margin-bottom:18px;transition:opacity .3s;}
     .feedback.hidden{opacity:0;pointer-events:none;}
     .feedback.correct-fb{background:#EDFFF1;color:#2A7A3A;}
     .feedback.wrong-fb{background:#FFF0F0;color:#CC0000;}
+    .feedback.try-fb{background:#FFF8E1;color:#B8740A;}
     .score-row{display:flex;justify-content:center;gap:14px;}
-    .score-pill{padding:6px 18px;border-radius:99px;font-weight:800;font-size:.95rem;}
+    .score-pill{padding:6px 18px;border-radius:99px;font-weight:800;font-size:.9rem;}
     .correct-pill{background:#EDFFF1;color:#2A7A3A;}
     .wrong-pill{background:#FFF0F0;color:#CC0000;}
-    .btn-next{display:none;margin:18px auto 0;padding:14px 46px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--yellow),var(--orange));color:white;font-family:'Fredoka One',cursive;font-size:1.35rem;cursor:pointer;box-shadow:0 6px 0 #c07800;transition:transform .12s,box-shadow .12s;}
-    .btn-next.show{display:block;}
-    .btn-next:active{transform:translateY(4px);box-shadow:0 2px 0 #c07800;}
-    .overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.93);z-index:100;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;animation:fadeIn .4s;}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.95);z-index:100;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;animation:fadeIn .4s;}
     .overlay.show{display:flex;}
     .overlay .big-emoji{font-size:96px;animation:bounce 1s infinite;}
-    .overlay h2{font-family:'Fredoka One',cursive;font-size:2.6rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;}
-    .overlay p{font-size:1.15rem;color:#555;font-weight:700;}
-    .btn-restart{margin-top:8px;padding:16px 48px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--pink),var(--purple));color:white;font-family:'Fredoka One',cursive;font-size:1.35rem;cursor:pointer;box-shadow:0 6px 0 #9a00cc;}
+    .overlay h2{font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--pink);text-shadow:3px 3px 0 #FFD1E8;}
+    .overlay p{font-size:1.1rem;color:#555;font-weight:700;max-width:340px;}
+    .btn-restart{margin-top:8px;padding:15px 46px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--pink),var(--purple));color:white;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;box-shadow:0 6px 0 #7a00cc;}
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-    @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.28)}100%{transform:scale(1)}}
+    @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
     @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
     @keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     #confetti{position:fixed;inset:0;pointer-events:none;z-index:99;}
-    @media(max-width:480px){header h1{font-size:1.7rem;}.letter-box{width:66px;height:76px;font-size:2.1rem;}.picture-box{font-size:76px;}.choice-btn{width:58px;height:58px;font-size:1.6rem;}}
+    @media(max-width:480px){
+      header h1{font-size:1.5rem;}
+      .letter-box{width:64px;height:74px;font-size:2.1rem;}
+      .picture-box{font-size:72px;}
+      .choice-btn{width:60px;height:60px;font-size:1.7rem;}
+    }
   </style>
 </head>
 <body>
 <canvas id="confetti"></canvas>
+
+<!-- End screen -->
 <div class="overlay" id="overlay">
   <div class="big-emoji" id="overlayEmoji">&#x1F3C6;</div>
   <h2 id="overlayTitle">Amazing!</h2>
   <p id="overlayMsg">You finished!</p>
-  <div class="score-row" style="margin-top:4px">
+  <div class="score-row" style="margin-top:6px">
     <span class="score-pill correct-pill" id="finalCorrect">&#x2705; 0 correct</span>
-    <span class="score-pill wrong-pill" id="finalWrong">&#x274C; 0 wrong</span>
+    <span class="score-pill wrong-pill"   id="finalWrong">&#x274C; 0 wrong</span>
   </div>
   <button class="btn-restart" onclick="restartGame()">&#x1F504; Play Again!</button>
 </div>
+
+<!-- Main card -->
 <div class="card">
   <header>
     <span class="header-emoji">&#x1F34E;</span>
-    <h1>Middle Sound <span style="color:var(--orange)">A</span>!</h1>
-    <p class="subtitle">Click the letter that goes in the middle!
+    <h1>Beginning and Middle Sound <span style="color:var(--orange)">A</span>!</h1>
+    <p class="subtitle">
+      Find the letter A in each word!
       <button class="btn-speak-inst" onclick="speakInstructions()" title="Hear instructions">&#x1F50A;</button>
     </p>
   </header>
-  <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
-  <div class="progress-label" id="progressLabel">Word 1 of 8</div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar" id="progressBar" style="width:0%"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">Word 1 of 10</div>
+
   <div class="word-area">
-    <div class="picture-box" id="pictureBox">&#x1F353;</div>
+    <div class="picture-box" id="pictureBox">&#x1F34E;</div>
     <div class="letter-boxes" id="letterBoxes"></div>
   </div>
+
   <div class="word-label" id="wordLabel">_ _ _</div>
-  <div class="choice-label">Which letter makes the middle sound? &#x1F447;</div>
+
+  <div class="choice-label" id="choiceLabel">
+    Which letter makes the sound? &#x1F447;
+  </div>
+
   <div class="choices" id="choices"></div>
+
   <div class="feedback hidden" id="feedback"></div>
-  <button class="btn-next" id="btnNext" onclick="nextWord()">Next Word &#x27A1;&#xFE0F;</button>
+
   <div class="score-row">
     <span class="score-pill correct-pill" id="scoreCorrect">&#x2705; 0 correct</span>
-    <span class="score-pill wrong-pill" id="scoreWrong">&#x274C; 0 wrong</span>
+    <span class="score-pill wrong-pill"   id="scoreWrong">&#x274C; 0 wrong</span>
   </div>
 </div>
+
 <script>
-const WORDS=[
-  {emoji:'\u{1FAD9}',word:'jam',hint:'a jar of jam'},
-  {emoji:'\u{1F690}',word:'van',hint:'a van'},
-  {emoji:'\u{1F431}',word:'cat',hint:'a cat'},
-  {emoji:'\u{1F9E2}',word:'cap',hint:'a cap'},
-  {emoji:'\u{1F987}',word:'bat',hint:'a bat'},
-  {emoji:'\u{1F5FA}',word:'map',hint:'a map'},
-  {emoji:'\u{1F6CD}',word:'bag',hint:'a bag'},
-  {emoji:'\u{1F6B0}',word:'tap',hint:'a tap'},
-  {emoji:'\u{1F40F}',word:'ram',hint:'a ram'},
-  {emoji:'\u{1F9B8}',word:'man',hint:'a man'}
+/* =========================================================
+   WORD DATA
+   type: "middle" = blank is index 1
+         "begin"  = blank is index 0
+   ========================================================= */
+const WORDS = [
+  // ── MIDDLE sound A ──
+  { emoji: String.fromCodePoint(0x1FAD9), word: 'jam', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F690), word: 'van', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F431), word: 'cat', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F9E2), word: 'cap', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F987), word: 'bat', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F5FA), word: 'map', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F6CD), word: 'bag', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F6B0), word: 'tap', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F40F), word: 'ram', blankIdx: 1, type: 'middle' },
+  { emoji: String.fromCodePoint(0x1F9B8), word: 'man', blankIdx: 1, type: 'middle' },
+  // ── BEGINNING sound A ──
+  { emoji: String.fromCodePoint(0x1F34E), word: 'apple', blankIdx: 0, type: 'begin', display: 'apple' },
+  { emoji: String.fromCodePoint(0x2693),  word: 'anchor', blankIdx: 0, type: 'begin', display: 'anchor' },
+  { emoji: String.fromCodePoint(0x1F41C), word: 'ant',   blankIdx: 0, type: 'begin', display: 'ant' },
+  { emoji: String.fromCodePoint(0x1FA93), word: 'axe',   blankIdx: 0, type: 'begin', display: 'axe' },
+  { emoji: String.fromCodePoint(0x1F9B6), word: 'arm',   blankIdx: 0, type: 'begin', display: 'arm' },
+  { emoji: String.fromCodePoint(0x1F3A8), word: 'art',   blankIdx: 0, type: 'begin', display: 'art' },
+  { emoji: String.fromCodePoint(0x1F680), word: 'astronaut', blankIdx: 0, type: 'begin', display: 'astronaut' },
+  { emoji: String.fromCodePoint(0x1F9EA), word: 'acid',  blankIdx: 0, type: 'begin', display: 'acid' },
 ];
-const BLANK_IDX=1,CORRECT='a';
-const DIST=['e','i','o','u','b','d','m','s','t'];
-const QSIZE=8;
-function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
-function makeChoices(){return shuffle([CORRECT,...shuffle(DIST).slice(0,3)]);}
-let queue,qIdx,cc,wc,answered;
-function initGame(){queue=shuffle(WORDS).slice(0,QSIZE);qIdx=cc=wc=0;answered=false;updateScore();renderWord(queue[0]);setTimeout(()=>speak('Welcome! Look at the picture and click the letter A to complete the word!',0.85,1.3),600);}
-function renderWord(item){
-  answered=false;
-  document.getElementById('pictureBox').textContent=item.emoji;
-  const boxes=document.getElementById('letterBoxes');boxes.innerHTML='';
-  for(let i=0;i<item.word.length;i++){const d=document.createElement('div');d.className='letter-box '+(i===BLANK_IDX?'blank':'given');d.id='box'+i;d.textContent=i===BLANK_IDX?'?':item.word[i];boxes.appendChild(d);}
-  document.getElementById('wordLabel').textContent=item.word.split('').map((c,i)=>i===BLANK_IDX?'_':c).join('  ');
-  const ch=document.getElementById('choices');ch.innerHTML='';
-  makeChoices().forEach(l=>{const b=document.createElement('button');b.className='choice-btn'+(l===CORRECT?' correct-letter':'');b.textContent=l;b.setAttribute('aria-label','letter '+l);b.onclick=()=>selectLetter(l,b);ch.appendChild(b);});
-  const fb=document.getElementById('feedback');fb.className='feedback hidden';fb.textContent='';
-  document.getElementById('btnNext').classList.remove('show');
-  const pct=Math.round((qIdx/QSIZE)*100);
-  document.getElementById('progressBar').style.width=pct+'%';
-  document.getElementById('progressLabel').textContent='Word '+(qIdx+1)+' of '+QSIZE;
-  setTimeout(()=>speakPrompt(item),300);
+
+const CORRECT = 'a';
+const DISTRACTORS = ['e','i','o','u','b','d','s','t','m'];
+const QSIZE = 10;
+
+/* ── phonics map: letter -> TTS-friendly sound spelling ── */
+const PHONICS = {
+  a:'aaa', e:'ehh', i:'ih', o:'aww', u:'uh',
+  b:'buh', c:'kuh', d:'duh', f:'fuh', g:'guh',
+  h:'huh', j:'juh', k:'kuh', l:'luh', m:'muh',
+  n:'nuh', p:'puh', r:'rr',  s:'sss', t:'tuh',
+  v:'vuh', w:'wuh', x:'ksss',y:'yuh', z:'zzz'
+};
+function phon(l){ return PHONICS[l.toLowerCase()] || l; }
+
+/* ========================================================
+   SPEECH ENGINE
+   Uses chained SpeechSynthesisUtterances for natural pauses.
+   Picks the best available voice each time.
+   ======================================================== */
+let _bestVoice = null;
+
+function _pickVoice() {
+  const all = speechSynthesis.getVoices();
+  return (
+    all.find(v => /samantha/i.test(v.name))   ||
+    all.find(v => /karen/i.test(v.name))       ||
+    all.find(v => /moira/i.test(v.name))       ||
+    all.find(v => /tessa/i.test(v.name))       ||
+    all.find(v => /google us english/i.test(v.name)) ||
+    all.find(v => /microsoft zira/i.test(v.name))    ||
+    all.find(v => v.lang === 'en-US' && !v.localService) ||
+    all.find(v => v.lang === 'en-US')          ||
+    all.find(v => v.lang.startsWith('en'))     ||
+    all[0]
+  );
 }
-function selectLetter(letter,btn){
-  if(answered)return;answered=true;
-  document.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
-  const box=document.getElementById('box'+BLANK_IDX);
-  const fb=document.getElementById('feedback');
-  const item=queue[qIdx];
-  box.textContent=letter;
-  const CM=['Star! Yes! The letter A! Great job!','Awesome! A is right!','Super! You found the A!','Wow! Perfect!','Amazing! That is the A!'];
-  const WM=['Oops! The missing letter is A! Try the next one!','Not quite! It was A. You can do it!','Almost! The middle sound is A!'];
-  if(letter===CORRECT){cc++;box.className='letter-box filled-correct';btn.className='choice-btn selected-correct';const msg=CM[Math.floor(Math.random()*CM.length)];fb.textContent=msg;fb.className='feedback correct-fb';speak(msg,0.9,1.35);}
-  else{wc++;box.className='letter-box filled-wrong';btn.className='choice-btn selected-wrong';document.querySelectorAll('.choice-btn').forEach(b=>{if(b.textContent===CORRECT)b.style.outline='4px solid var(--green)';});const msg=WM[Math.floor(Math.random()*WM.length)];fb.textContent=msg;fb.className='feedback wrong-fb';speak(msg,0.88,1.2);}
-  updateScore();document.getElementById('btnNext').classList.add('show');
-  setTimeout(()=>{if(answered)nextWord();},2600);
+
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = () => { _bestVoice = _pickVoice(); };
 }
-function nextWord(){qIdx++;if(qIdx>=QSIZE){endGame();return;}renderWord(queue[qIdx]);}
-function updateScore(){document.getElementById('scoreCorrect').textContent='✅ '+cc+' correct';document.getElementById('scoreWrong').textContent='❌ '+wc+' wrong';}
-function endGame(){
+setTimeout(() => { _bestVoice = _pickVoice(); }, 200);
+
+/* Cancel everything and speak a single utterance */
+function speak(text, { rate=0.88, pitch=1.3, vol=1.0, onend=null } = {}) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang   = 'en-US';
+  u.rate   = rate;
+  u.pitch  = pitch;
+  u.volume = vol;
+  u.voice  = _bestVoice || _pickVoice();
+  if (onend) u.onend = onend;
+  speechSynthesis.speak(u);
+}
+
+/* Speak a list of {text,rate,pitch} segments back-to-back */
+function speakChain(parts, onDone) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  let idx = 0;
+  function next() {
+    if (idx >= parts.length) { if (onDone) onDone(); return; }
+    const p = parts[idx++];
+    const u = new SpeechSynthesisUtterance(p.text);
+    u.lang   = 'en-US';
+    u.rate   = p.rate  ?? 0.88;
+    u.pitch  = p.pitch ?? 1.3;
+    u.volume = p.vol   ?? 1.0;
+    u.voice  = _bestVoice || _pickVoice();
+    u.onend  = next;
+    speechSynthesis.speak(u);
+  }
+  next();
+}
+
+/* ─── GAME STATE ─── */
+let queue, qIdx, cc, wc;
+
+function shuffle(a) {
+  const b = [...a];
+  for (let i = b.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [b[i], b[j]] = [b[j], b[i]];
+  }
+  return b;
+}
+
+function makeChoices() {
+  return shuffle([CORRECT, ...shuffle(DISTRACTORS).slice(0, 3)]);
+}
+
+function initGame() {
+  /* mix middle and begin words, pick QSIZE randomly */
+  queue = shuffle(WORDS).slice(0, QSIZE);
+  qIdx = cc = wc = 0;
+  updateScore();
+  renderWord(queue[0]);
+  setTimeout(() => {
+    speakChain([
+      { text: "Let's find the letter A!", rate: 0.82, pitch: 1.42 },
+      { text: "Some words start with A.", rate: 0.82, pitch: 1.35 },
+      { text: "Some words have A in the middle.", rate: 0.82, pitch: 1.35 },
+      { text: "Listen carefully and click the right letter!", rate: 0.85, pitch: 1.38 },
+    ]);
+  }, 700);
+}
+
+/* ─── RENDER ─── */
+function renderWord(item) {
+  document.getElementById('pictureBox').textContent = item.emoji;
+  buildLetterBoxes(item);
+  buildWordLabel(item);
+  buildChoices(item);
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback hidden';
+  fb.innerHTML = '';
+
+  const pct = Math.round((qIdx / QSIZE) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent =
+    'Word ' + (qIdx + 1) + ' of ' + QSIZE;
+
+  setTimeout(() => speakPrompt(item), 400);
+}
+
+function buildLetterBoxes(item) {
+  const wrap = document.getElementById('letterBoxes');
+  wrap.innerHTML = '';
+  for (let i = 0; i < item.word.length; i++) {
+    const d = document.createElement('div');
+    d.className = 'letter-box ' + (i === item.blankIdx ? 'blank' : 'given');
+    d.id = 'box' + i;
+    d.textContent = i === item.blankIdx ? '?' : item.word[i];
+    wrap.appendChild(d);
+  }
+}
+
+function buildWordLabel(item) {
+  document.getElementById('wordLabel').textContent =
+    item.word.split('').map((c, i) => i === item.blankIdx ? '_' : c).join('  ');
+}
+
+function buildChoices(item) {
+  const wrap = document.getElementById('choices');
+  wrap.innerHTML = '';
+  makeChoices().forEach(l => {
+    const b = document.createElement('button');
+    b.className = 'choice-btn' + (l === CORRECT ? ' correct-letter' : '');
+    b.textContent = l;
+    b.setAttribute('aria-label', 'letter ' + l);
+    b.onclick         = () => selectLetter(l, b, item);
+    b.onmouseenter    = () => { if (!b.disabled) speak(phon(l), { rate: 0.72, pitch: 1.42 }); };
+    b.addEventListener('touchstart', () => { if (!b.disabled) speak(phon(l), { rate: 0.72, pitch: 1.42 }); }, { passive: true });
+    wrap.appendChild(b);
+  });
+}
+
+/* ─── PROMPTS ─── */
+function speakPrompt(item) {
+  const pos = item.type === 'begin' ? 'beginning' : 'middle';
+  speakChain([
+    { text: 'Click on the letter', rate: 0.82, pitch: 1.38 },
+    { text: 'that makes the ' + pos + ' sound', rate: 0.80, pitch: 1.35 },
+    { text: 'in the word', rate: 0.82, pitch: 1.35 },
+    { text: item.display || item.word, rate: 0.70, pitch: 1.45 },
+  ]);
+}
+
+function speakInstructions() {
+  speakChain([
+    { text: 'Look at the picture!', rate: 0.82, pitch: 1.42 },
+    { text: 'Find the letter A', rate: 0.80, pitch: 1.35 },
+    { text: 'at the beginning or in the middle of the word!', rate: 0.82, pitch: 1.32 },
+  ]);
+}
+
+/* ─── SELECT ─── */
+function selectLetter(letter, btn, item) {
+  /* if this button is already disabled (wrong pick), ignore */
+  if (btn.disabled) return;
+
+  const box = document.getElementById('box' + item.blankIdx);
+  const fb  = document.getElementById('feedback');
+  box.textContent = letter;
+
+  if (letter === CORRECT) {
+    /* ── CORRECT ── */
+    cc++;
+    disableAll();
+    box.className = 'letter-box filled-correct';
+    btn.className = 'choice-btn selected-correct';
+
+    const msgs = [
+      "Yes! That's the letter A! Wonderful!",
+      "Woo hoo! You found the A! Great job!",
+      "Super duper! A is exactly right!",
+      "Yay! You got it! The letter A!",
+      "Hooray! Brilliant work! That's the A!",
+    ];
+    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+    fb.textContent = msg;
+    fb.className = 'feedback correct-fb';
+
+    speakChain([
+      { text: msg, rate: 0.88, pitch: 1.42 },
+    ]);
+    updateScore();
+    setTimeout(advanceWord, 2400);
+
+  } else {
+    /* ── WRONG ── */
+    wc++;
+    box.className = 'letter-box filled-wrong';
+    btn.className = 'choice-btn selected-wrong';
+    btn.disabled  = true;
+
+    /* build the wrongly-blended word */
+    const letters = item.word.split('');
+    letters[item.blankIdx] = letter;
+    const blended = letters.join('');
+
+    fb.innerHTML = 'Hmm... <b>' + blended + '</b>? That doesn't sound right! Try again!';
+    fb.className = 'feedback wrong-fb';
+    updateScore();
+
+    /* speak: each sound separately, then blend, then encourage */
+    const soundParts = item.word.split('').map((c, i) => ({
+      text: phon(i === item.blankIdx ? letter : c),
+      rate: 0.68, pitch: 1.38
+    }));
+
+    speakChain([
+      ...soundParts,
+      { text: blended, rate: 0.72, pitch: 1.2 },
+      { text: "Hmm! That doesn't sound quite right.", rate: 0.85, pitch: 1.3 },
+      { text: "Let's try again!", rate: 0.9, pitch: 1.45 },
+    ], () => {
+      /* after speech: reset box + re-prompt */
+      box.className   = 'letter-box blank';
+      box.textContent = '?';
+      fb.className    = 'feedback try-fb';
+      fb.textContent  = 'Try again!';
+      setTimeout(() => speakPrompt(item), 300);
+    });
+  }
+}
+
+function disableAll() {
+  document.querySelectorAll('.choice-btn').forEach(b => { b.disabled = true; });
+}
+
+function advanceWord() {
+  qIdx++;
+  if (qIdx >= QSIZE) { endGame(); return; }
+  renderWord(queue[qIdx]);
+}
+
+/* ─── SCORE ─── */
+function updateScore() {
+  document.getElementById('scoreCorrect').textContent = '\u2705 ' + cc + ' correct';
+  document.getElementById('scoreWrong').textContent   = '\u274C ' + wc + ' wrong';
+}
+
+/* ─── END GAME ─── */
+function endGame() {
   launchConfetti();
-  const pct=Math.round((cc/QSIZE)*100);
-  let em,ti,msg;
-  if(pct===100){em='🏆';ti='Perfect Score!';msg='You got every letter A right!';}
-  else if(pct>=75){em='🌟';ti='Amazing Job!';msg='You found the A '+cc+' out of '+QSIZE+' times!';}
-  else{em='💪';ti='Keep Practicing!';msg='You got '+cc+' out of '+QSIZE+'. Try again!';}
-  document.getElementById('overlayEmoji').textContent=em;
-  document.getElementById('overlayTitle').textContent=ti;
-  document.getElementById('overlayMsg').textContent=msg;
-  document.getElementById('finalCorrect').textContent='✅ '+cc+' correct';
-  document.getElementById('finalWrong').textContent='❌ '+wc+' wrong';
+  const pct = Math.round((cc / QSIZE) * 100);
+  let em, ti, msg;
+  if (pct === 100) { em = '\u{1F3C6}'; ti = 'Perfect Score!';   msg = 'You found every single letter A! You are a SUPERSTAR!'; }
+  else if (pct >= 70){ em = '\u2B50'; ti = 'Amazing Job!';     msg = 'You found the letter A ' + cc + ' out of ' + QSIZE + ' times! Fantastic!'; }
+  else               { em = '\u{1F4AA}'; ti = 'Keep Going!';   msg = 'You got ' + cc + ' out of ' + QSIZE + '. Keep practicing, you can do it!'; }
+  document.getElementById('overlayEmoji').textContent = em;
+  document.getElementById('overlayTitle').textContent = ti;
+  document.getElementById('overlayMsg').textContent   = msg;
+  document.getElementById('finalCorrect').textContent = '\u2705 ' + cc + ' correct';
+  document.getElementById('finalWrong').textContent   = '\u274C ' + wc + ' wrong';
   document.getElementById('overlay').classList.add('show');
-  speak(ti+' '+msg,0.85,1.35);
+  setTimeout(() => speakChain([
+    { text: ti, rate: 0.85, pitch: 1.45 },
+    { text: msg, rate: 0.85, pitch: 1.35 },
+  ]), 500);
 }
-function restartGame(){document.getElementById('overlay').classList.remove('show');stopConfetti();initGame();}
-function speak(text,rate=0.88,pitch=1.25){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=rate;u.pitch=pitch;const vs=speechSynthesis.getVoices();const v=vs.find(v=>/samantha|zoe|karen|moira|tessa|susan/i.test(v.name))||vs.find(v=>v.lang.startsWith('en'))||vs[0];if(v)u.voice=v;speechSynthesis.speak(u);}
-function speakInstructions(){speak('Look at the picture! Click the letter A to fill in the missing middle sound!',0.85,1.3);}
-function speakPrompt(item){speak('What is the middle sound? '+item.hint,0.8,1.3);}
-let confAnim;const canvas=document.getElementById('confetti');const ctx=canvas.getContext('2d');let pieces=[];
-function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-window.addEventListener('resize',resize);resize();
-const COLS=['#FF6B9D','#FFD93D','#6BCB77','#4D96FF','#C77DFF','#FF9A3C'];
-function launchConfetti(){pieces=[];for(let i=0;i<200;i++){pieces.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,w:7+Math.random()*9,h:12+Math.random()*9,color:COLS[Math.floor(Math.random()*COLS.length)],rot:Math.random()*360,vx:(Math.random()-.5)*4,vy:3+Math.random()*4,vr:(Math.random()-.5)*6});}animC();}
-function animC(){ctx.clearRect(0,0,canvas.width,canvas.height);pieces.forEach(p=>{ctx.save();ctx.translate(p.x+p.w/2,p.y+p.h/2);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;});pieces=pieces.filter(p=>p.y<canvas.height+20);if(pieces.length>0)confAnim=requestAnimationFrame(animC);}
-function stopConfetti(){cancelAnimationFrame(confAnim);ctx.clearRect(0,0,canvas.width,canvas.height);}
-if(speechSynthesis.onvoiceschanged!==undefined)speechSynthesis.onvoiceschanged=()=>{};
+
+function restartGame() {
+  document.getElementById('overlay').classList.remove('show');
+  stopConfetti();
+  initGame();
+}
+
+/* ─── CONFETTI ─── */
+let confAnim;
+const cvs = document.getElementById('confetti');
+const ctx  = cvs.getContext('2d');
+let pcs    = [];
+function rsz() { cvs.width = innerWidth; cvs.height = innerHeight; }
+window.addEventListener('resize', rsz); rsz();
+const COLS = ['#FF6B9D','#FFD93D','#6BCB77','#4D96FF','#C77DFF','#FF9A3C'];
+function launchConfetti() {
+  pcs = Array.from({length:220}, () => ({
+    x: Math.random() * cvs.width,
+    y: Math.random() * cvs.height - cvs.height,
+    w: 7 + Math.random() * 9, h: 11 + Math.random() * 10,
+    color: COLS[Math.floor(Math.random() * COLS.length)],
+    rot: Math.random() * 360,
+    vx: (Math.random() - .5) * 4,
+    vy: 3 + Math.random() * 4.5,
+    vr: (Math.random() - .5) * 7,
+  }));
+  animConf();
+}
+function animConf() {
+  ctx.clearRect(0, 0, cvs.width, cvs.height);
+  pcs.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x + p.w / 2, p.y + p.h / 2);
+    ctx.rotate(p.rot * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    ctx.restore();
+    p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+  });
+  pcs = pcs.filter(p => p.y < cvs.height + 20);
+  if (pcs.length > 0) confAnim = requestAnimationFrame(animConf);
+}
+function stopConfetti() { cancelAnimationFrame(confAnim); ctx.clearRect(0, 0, cvs.width, cvs.height); }
+
+/* ─── START ─── */
 initGame();
 </script>
 </body>
 </html>
-─ WORD DATA ──
-const WORDS = [
-  {emoji:'\u{1FAD9}', word:'jam', display:'jam',  hint:'jam'},
-    {emoji:'\u{1F690}', word:'van', display:'van',  hint:'van'},
-      {emoji:'\u{1F431}', word:'cat', display:'cat',  hint:'cat'},
-        {emoji:'\u{1F9E2}', word:'cap', display:'cap',  hint:'cap'},
-          {emoji:'\u{1F987}', word:'bat', display:'bat',  hint:'bat'},
-            {emoji:'\u{1F5FA}', word:'map', display:'map',  hint:'map'},
-              {emoji:'\u{1F6CD}', word:'bag', display:'bag',  hint:'bag'},
-                {emoji:'\u{1F6B0}', word:'tap', display:'tap',  hint:'tap'},
-                  {emoji:'\u{1F40F}', word:'ram', display:'ram',  hint:'ram'},
-                    {emoji:'\u{1F9B8}', word:'man', display:'man',  hint:'man'}
-                    ];
-
-                    const BLANK_IDX = 1;
-                    const CORRECT   = 'a';
-                    const DIST      = ['e','i','o','u','b','d','m','s','t'];
-                    const QSIZE     = 8;
-
-                    // ── SHORT VOWEL / CONSONANT PHONETIC SOUNDS for TTS ──
-                    // We spell these out in ways that make TTS say the actual sound
-                    const PHONICS = {
-                      a: 'aaa',   // short a as in cat
-                        e: 'eh',    // short e as in bed
-                          i: 'ih',    // short i as in big
-                            o: 'ah',    // short o as in hot
-                              u: 'uh',    // short u as in bug
-                                b: 'buh',   c: 'kuh',  d: 'duh',  f: 'fuh',
-                                  g: 'guh',   h: 'huh',  j: 'juh',  k: 'kuh',
-                                    l: 'luh',   m: 'muh',  n: 'nuh',  p: 'puh',
-                                      r: 'ruh',   s: 'sss',  t: 'tuh',  v: 'vuh',
-                                        w: 'wuh',   x: 'ksss', y: 'yuh',  z: 'zzz'
-                                        };
-
-                                        function phon(letter) {
-                                          return PHONICS[letter.toLowerCase()] || letter;
-                                          }
-
-                                          // Build a blended "word" from phonics sounds for a given word+middleLetter
-                                          function blendWord(word, midLetter) {
-                                            const letters = word.split('');
-                                              letters[BLANK_IDX] = midLetter;
-                                                return letters.map(phon).join('... ');
-                                                }
-
-                                                // ── SPEECH ENGINE ──
-                                                let speechReady = false;
-                                                let voiceSelected = null;
-
-                                                function loadVoices() {
-                                                  const voices = speechSynthesis.getVoices();
-                                                    // prefer: Samantha, Karen, Google US English female, Zira, any en-US
-                                                      voiceSelected =
-                                                          voices.find(v => /samantha/i.test(v.name)) ||
-                                                              voices.find(v => /karen/i.test(v.name)) ||
-                                                                  voices.find(v => /google us english/i.test(v.name)) ||
-                                                                      voices.find(v => /zira/i.test(v.name)) ||
-                                                                          voices.find(v => v.lang === 'en-US') ||
-                                                                              voices.find(v => v.lang.startsWith('en')) ||
-                                                                                  voices[0];
-                                                                                    speechReady = true;
-                                                                                    }
-                                                                                    speechSynthesis.onvoiceschanged = loadVoices;
-                                                                                    loadVoices();
-
-                                                                                    let speakQueue = [];
-                                                                                    let isSpeaking  = false;
-
-                                                                                    function speak(text, opts = {}) {
-                                                                                      const rate  = opts.rate  ?? 0.92;
-                                                                                        const pitch = opts.pitch ?? 1.28;
-                                                                                          const vol   = opts.vol   ?? 1.0;
-                                                                                            if (!window.speechSynthesis) return;
-                                                                                              window.speechSynthesis.cancel();
-                                                                                                speakQueue = [];
-                                                                                                  isSpeaking = false;
-                                                                                                    _doSpeak(text, rate, pitch, vol, opts.onend);
-                                                                                                    }
-
-                                                                                                    function _doSpeak(text, rate, pitch, vol, onend) {
-                                                                                                      const u = new SpeechSynthesisUtterance(text);
-                                                                                                        u.lang  = 'en-US';
-                                                                                                          u.rate  = rate;
-                                                                                                            u.pitch = pitch;
-                                                                                                              u.volume = vol;
-                                                                                                                if (voiceSelected) u.voice = voiceSelected;
-                                                                                                                  u.onend = () => { if (onend) onend(); };
-                                                                                                                    speechSynthesis.speak(u);
-                                                                                                                    }
-
-                                                                                                                    // Speak a sequence of utterances one after another
-                                                                                                                    function speakSequence(parts) {
-                                                                                                                      if (!window.speechSynthesis) return;
-                                                                                                                        window.speechSynthesis.cancel();
-                                                                                                                          let i = 0;
-                                                                                                                            function next() {
-                                                                                                                                if (i >= parts.length) return;
-                                                                                                                                    const p = parts[i++];
-                                                                                                                                        const u = new SpeechSynthesisUtterance(p.text);
-                                                                                                                                            u.lang   = 'en-US';
-                                                                                                                                                u.rate   = p.rate  ?? 0.88;
-                                                                                                                                                    u.pitch  = p.pitch ?? 1.28;
-                                                                                                                                                        u.volume = p.vol   ?? 1.0;
-                                                                                                                                                            if (voiceSelected) u.voice = voiceSelected;
-                                                                                                                                                                u.onend = next;
-                                                                                                                                                                    speechSynthesis.speak(u);
-                                                                                                                                                                      }
-                                                                                                                                                                        next();
-                                                                                                                                                                        }
-
-                                                                                                                                                                        // ── GAME STATE ──
-                                                                                                                                                                        let queue, qIdx, cc, wc, answered;
-
-                                                                                                                                                                        function shuffle(a) {
-                                                                                                                                                                          const b = [...a];
-                                                                                                                                                                            for (let i = b.length-1; i > 0; i--) {
-                                                                                                                                                                                const j = Math.floor(Math.random()*(i+1));
-                                                                                                                                                                                    [b[i],b[j]] = [b[j],b[i]];
-                                                                                                                                                                                      }
-                                                                                                                                                                                        return b;
-                                                                                                                                                                                        }
-
-                                                                                                                                                                                        function makeChoices() {
-                                                                                                                                                                                          return shuffle([CORRECT, ...shuffle(DIST).slice(0,3)]);
-                                                                                                                                                                                          }
-
-                                                                                                                                                                                          function initGame() {
-                                                                                                                                                                                            queue = shuffle(WORDS).slice(0, QSIZE);
-                                                                                                                                                                                              qIdx = cc = wc = 0;
-                                                                                                                                                                                                answered = false;
-                                                                                                                                                                                                  updateScore();
-                                                                                                                                                                                                    renderWord(queue[0]);
-                                                                                                                                                                                                      setTimeout(() => {
-                                                                                                                                                                                                          speak("Let's practice the middle sound A!  Look at each picture and click the letter that makes the middle sound!", {rate:0.9, pitch:1.35});
-                                                                                                                                                                                                            }, 600);
-                                                                                                                                                                                                            }
-
-                                                                                                                                                                                                            // ── RENDER ──
-                                                                                                                                                                                                            function renderWord(item) {
-                                                                                                                                                                                                              answered = false;
-
-                                                                                                                                                                                                                document.getElementById('pictureBox').textContent = item.emoji;
-
-                                                                                                                                                                                                                  const boxes = document.getElementById('letterBoxes');
-                                                                                                                                                                                                                    boxes.innerHTML = '';
-                                                                                                                                                                                                                      for (let i = 0; i < item.word.length; i++) {
-                                                                                                                                                                                                                          const d = document.createElement('div');
-                                                                                                                                                                                                                              d.className = 'letter-box ' + (i === BLANK_IDX ? 'blank' : 'given');
-                                                                                                                                                                                                                                  d.id = 'box' + i;
-                                                                                                                                                                                                                                      d.textContent = i === BLANK_IDX ? '?' : item.word[i];
-                                                                                                                                                                                                                                          boxes.appendChild(d);
-                                                                                                                                                                                                                                            }
-
-                                                                                                                                                                                                                                              document.getElementById('wordLabel').textContent =
-                                                                                                                                                                                                                                                  item.word.split('').map((c,i) => i === BLANK_IDX ? '_' : c).join('  ');
-
-                                                                                                                                                                                                                                                    buildChoices(item);
-
-                                                                                                                                                                                                                                                      const fb = document.getElementById('feedback');
-                                                                                                                                                                                                                                                        fb.className = 'feedback hidden';
-                                                                                                                                                                                                                                                          fb.textContent = '';
-
-                                                                                                                                                                                                                                                            const pct = Math.round((qIdx / QSIZE) * 100);
-                                                                                                                                                                                                                                                              document.getElementById('progressBar').style.width = pct + '%';
-                                                                                                                                                                                                                                                                document.getElementById('progressLabel').textContent = 'Word ' + (qIdx+1) + ' of ' + QSIZE;
-
-                                                                                                                                                                                                                                                                  setTimeout(() => speakPrompt(item), 350);
-                                                                                                                                                                                                                                                                  }
-
-                                                                                                                                                                                                                                                                  function buildChoices(item) {
-                                                                                                                                                                                                                                                                    const ch = document.getElementById('choices');
-                                                                                                                                                                                                                                                                      ch.innerHTML = '';
-                                                                                                                                                                                                                                                                        makeChoices().forEach(l => {
-                                                                                                                                                                                                                                                                            const b = document.createElement('button');
-                                                                                                                                                                                                                                                                                b.className = 'choice-btn' + (l === CORRECT ? ' correct-letter' : '');
-                                                                                                                                                                                                                                                                                    b.textContent = l;
-                                                                                                                                                                                                                                                                                        b.setAttribute('aria-label', 'letter ' + l);
-                                                                                                                                                                                                                                                                                            b.dataset.letter = l;
-                                                                                                                                                                                                                                                                                                b.onclick   = () => selectLetter(l, b);
-                                                                                                                                                                                                                                                                                                    b.onmouseenter = () => { if (!b.disabled) speakLetterSound(l); };
-                                                                                                                                                                                                                                                                                                        b.onfocus      = () => { if (!b.disabled) speakLetterSound(l); };
-                                                                                                                                                                                                                                                                                                            ch.appendChild(b);
-                                                                                                                                                                                                                                                                                                              });
-                                                                                                                                                                                                                                                                                                              }
-
-                                                                                                                                                                                                                                                                                                              // ── PROMPTS ──
-                                                                                                                                                                                                                                                                                                              function speakPrompt(item) {
-                                                                                                                                                                                                                                                                                                                speak(
-                                                                                                                                                                                                                                                                                                                    'Click on the letter... that makes the middle sound... in the word... ' + item.display + '!',
-                                                                                                                                                                                                                                                                                                                        {rate: 0.85, pitch: 1.32}
-                                                                                                                                                                                                                                                                                                                          );
-                                                                                                                                                                                                                                                                                                                          }
-
-                                                                                                                                                                                                                                                                                                                          function speakInstructions() {
-                                                                                                                                                                                                                                                                                                                            speak(
-                                                                                                                                                                                                                                                                                                                                "Look at the picture! Click the letter that makes the middle sound in the word!",
-                                                                                                                                                                                                                                                                                                                                    {rate: 0.88, pitch: 1.3}
-                                                                                                                                                                                                                                                                                                                                      );
-                                                                                                                                                                                                                                                                                                                                      }
-
-                                                                                                                                                                                                                                                                                                                                      function speakLetterSound(letter) {
-                                                                                                                                                                                                                                                                                                                                        speak(phon(letter), {rate: 0.75, pitch: 1.4});
-                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                        // ── SELECT LETTER ──
-                                                                                                                                                                                                                                                                                                                                        function selectLetter(letter, btn) {
-                                                                                                                                                                                                                                                                                                                                          if (answered) return;
-
-                                                                                                                                                                                                                                                                                                                                            const item  = queue[qIdx];
-                                                                                                                                                                                                                                                                                                                                              const box   = document.getElementById('box' + BLANK_IDX);
-                                                                                                                                                                                                                                                                                                                                                const fb    = document.getElementById('feedback');
-                                                                                                                                                                                                                                                                                                                                                  box.textContent = letter;
-
-                                                                                                                                                                                                                                                                                                                                                    if (letter === CORRECT) {
-                                                                                                                                                                                                                                                                                                                                                        // ── CORRECT ──
-                                                                                                                                                                                                                                                                                                                                                            answered = true;
-                                                                                                                                                                                                                                                                                                                                                                cc++;
-                                                                                                                                                                                                                                                                                                                                                                    disableAllChoices();
-                                                                                                                                                                                                                                                                                                                                                                        box.className = 'letter-box filled-correct';
-                                                                                                                                                                                                                                                                                                                                                                            btn.className = 'choice-btn selected-correct';
-
-                                                                                                                                                                                                                                                                                                                                                                                const praises = [
-                                                                                                                                                                                                                                                                                                                                                                                      "Yes! That's it! The letter A!  Great job!",
-                                                                                                                                                                                                                                                                                                                                                                                            "Woo hoo! You found the A!  Awesome work!",
-                                                                                                                                                                                                                                                                                                                                                                                                  "Super duper!  A is exactly right!",
-                                                                                                                                                                                                                                                                                                                                                                                                        "Yay! You got it!  The middle sound is A!",
-                                                                                                                                                                                                                                                                                                                                                                                                            ];
-                                                                                                                                                                                                                                                                                                                                                                                                                const msg = praises[Math.floor(Math.random() * praises.length)];
-                                                                                                                                                                                                                                                                                                                                                                                                                    fb.textContent = msg;
-                                                                                                                                                                                                                                                                                                                                                                                                                        fb.className = 'feedback correct-fb';
-                                                                                                                                                                                                                                                                                                                                                                                                                            speak(msg, {rate: 0.92, pitch: 1.38});
-                                                                                                                                                                                                                                                                                                                                                                                                                                updateScore();
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                    setTimeout(() => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                          qIdx++;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                if (qIdx >= QSIZE) { endGame(); } else { renderWord(queue[qIdx]); }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    }, 2400);
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                      } else {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          // ── WRONG ──
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              wc++;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  box.className = 'letter-box filled-wrong';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                      btn.className = 'choice-btn selected-wrong';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          btn.disabled  = true;  // only disable the wrong one clicked
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              const c1 = phon(item.word[0]);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  const cm = phon(letter);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      const c3 = phon(item.word[2]);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          const blended = item.word[0] + letter + item.word[2];  // e.g. "jom"
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              fb.textContent = 'Hmm... ' + blended + '? That doesn\'t sound quite right! Let\'s try again!';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  fb.className = 'feedback wrong-fb';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      updateScore();
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          speakSequence([
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                {text: c1,      rate:0.7,  pitch:1.35},
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {text: cm,      rate:0.7,  pitch:1.35},
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            {text: c3,      rate:0.7,  pitch:1.35},
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {text: blended, rate:0.72, pitch:1.2},
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        {text: "Hmm... that doesn't sound quite right! Let's try again!", rate:0.88, pitch:1.3},
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ]);
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Re-show the blank after a moment and re-prompt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    setTimeout(() => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          box.className   = 'letter-box blank';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                box.textContent = '?';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      fb.className    = 'feedback try-fb';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            fb.textContent  = 'Try again! &#x1F914;';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  setTimeout(() => speakPrompt(item), 400);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      }, 3200);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        function disableAllChoices() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          // ── SCORE ──
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          function updateScore() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            document.getElementById('scoreCorrect').textContent = '✅ ' + cc + ' correct';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              document.getElementById('scoreWrong').textContent   = '❌ ' + wc + ' wrong';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              // ── END GAME ──
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              function endGame() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                launchConfetti();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  const pct = Math.round((cc / QSIZE) * 100);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    let em, ti, msg;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      if (pct === 100) { em='🏆'; ti='Perfect Score!';   msg='You got every letter A right! Amazing!'; }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        else if (pct>=75){ em='🌟'; ti='Amazing Job!';     msg='You found the A ' + cc + ' out of ' + QSIZE + ' times!'; }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          else             { em='💪'; ti='Keep Practicing!'; msg='You got ' + cc + ' out of ' + QSIZE + '. You can do it!'; }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            document.getElementById('overlayEmoji').textContent = em;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              document.getElementById('overlayTitle').textContent = ti;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                document.getElementById('overlayMsg').textContent   = msg;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  document.getElementById('finalCorrect').textContent = '✅ ' + cc + ' correct';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    document.getElementById('finalWrong').textContent   = '❌ ' + wc + ' wrong';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      document.getElementById('overlay').classList.add('show');
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        setTimeout(() => speak(ti + '! ' + msg, {rate:0.88, pitch:1.38}), 400);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        function restartGame() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          document.getElementById('overlay').classList.remove('show');
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            stopConfetti();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              initGame();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              // ── CONFETTI ──
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              let confAnim;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              const canvas = document.getElementById('confetti');
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              const ctx    = canvas.getContext('2d');
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              let pieces   = [];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              window.addEventListener('resize', resize); resize();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              const COLS = ['#FF6B9D','#FFD93D','#6BCB77','#4D96FF','#C77DFF','#FF9A3C'];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              function launchConfetti() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                pieces = [];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  for (let i=0; i<200; i++) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      pieces.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height-canvas.height,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            w:7+Math.random()*9, h:12+Math.random()*9,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  color:COLS[Math.floor(Math.random()*COLS.length)],
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        rot:Math.random()*360, vx:(Math.random()-.5)*4,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              vy:3+Math.random()*4, vr:(Math.random()-.5)*6});
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  animC();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  function animC() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ctx.clearRect(0,0,canvas.width,canvas.height);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      pieces.forEach(p => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ctx.save(); ctx.translate(p.x+p.w/2, p.y+p.h/2);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          pieces = pieces.filter(p => p.y < canvas.height+20);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            if (pieces.length > 0) confAnim = requestAnimationFrame(animC);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            function stopConfetti() { cancelAnimationFrame(confAnim); ctx.clearRect(0,0,canvas.width,canvas.height); }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            initGame();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ENDOFFILE
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
