@@ -16,6 +16,56 @@
     align-items:center;
     padding:16px 10px 40px;
   }
+
+  /* ── SPLASH OVERLAY ── */
+  #splash{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+    gap:24px;
+    padding:24px;
+  }
+  #splash h2{
+    font-size:3rem;
+    font-weight:900;
+    color:#fff;
+    text-shadow:3px 3px 0 #e91e63,6px 6px 0 #880e4f;
+    text-align:center;
+    line-height:1.2;
+  }
+  #splash p{
+    font-size:1.3rem;
+    color:#fff;
+    font-weight:700;
+    text-align:center;
+    text-shadow:1px 1px 0 #333;
+    max-width:480px;
+    line-height:1.6;
+  }
+  #begin-btn{
+    background:linear-gradient(135deg,#ff4081,#f50057);
+    color:#fff;
+    border:none;
+    border-radius:50px;
+    padding:18px 56px;
+    font-size:1.6rem;
+    font-weight:900;
+    cursor:pointer;
+    font-family:'Nunito',sans-serif;
+    box-shadow:0 8px 24px rgba(245,0,87,0.5);
+    transition:all 0.2s;
+    letter-spacing:1px;
+  }
+  #begin-btn:hover{transform:scale(1.08);box-shadow:0 12px 30px rgba(245,0,87,0.6);}
+
+  /* ── HEADER ── */
   h1{
     font-size:2.4rem;
     font-weight:900;
@@ -36,7 +86,7 @@
     padding:8px 22px;
   }
 
-  /* PROGRESS BAR */
+  /* ── PROGRESS BAR ── */
   .progress-wrap{
     width:100%;
     max-width:640px;
@@ -66,7 +116,7 @@
     width:0%;
   }
 
-  /* CARD */
+  /* ── CARD ── */
   .card{
     background:#fff;
     border-radius:28px;
@@ -79,7 +129,7 @@
   }
   .card.active{display:block;}
 
-  /* QUESTION ROW */
+  /* ── QUESTION ROW ── */
   .question-row{
     display:flex;
     align-items:center;
@@ -131,7 +181,7 @@
   }
   @keyframes pop{0%{transform:scale(0.6)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
 
-  /* CHOICES */
+  /* ── CHOICES ── */
   .choices-label{
     font-size:1rem;
     font-weight:700;
@@ -151,27 +201,16 @@
     border-radius:18px;
     border:4px solid #64b5f6;
     background:#e3f2fd;
-    font-size:2.2rem;
+    font-size:2.4rem;
     font-weight:900;
     color:#1565c0;
     cursor:pointer;
     transition:all 0.15s;
     font-family:'Nunito',sans-serif;
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    position:relative;
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:2px;
-    line-height:1;
-  }
-  .choice-btn .phonetic{
-    font-size:0.62rem;
-    font-weight:700;
-    color:#1976d2;
-    letter-spacing:0.5px;
-    opacity:0.75;
   }
   .choice-btn:hover{
     background:#bbdefb;
@@ -206,16 +245,17 @@
     100%{transform:translateX(0)}
   }
 
-  /* FEEDBACK */
+  /* ── FEEDBACK ── */
   .feedback-box{
     margin-top:18px;
     min-height:52px;
     border-radius:16px;
-    padding:10px 16px;
+    padding:12px 18px;
     font-size:1.15rem;
     font-weight:700;
     text-align:center;
     display:none;
+    line-height:1.5;
   }
   .feedback-box.correct-fb{
     background:#e8f5e9;
@@ -239,10 +279,10 @@
     font-style:italic;
   }
 
-  /* CONTINUE BUTTON */
+  /* ── CONTINUE BUTTON ── */
   .continue-btn{
     display:none;
-    margin:16px auto 0;
+    margin:18px auto 0;
     background:linear-gradient(135deg,#ff4081,#f50057);
     color:#fff;
     border:none;
@@ -257,7 +297,7 @@
   }
   .continue-btn:hover{transform:scale(1.06);box-shadow:0 10px 24px rgba(245,0,87,0.5);}
 
-  /* DONE SCREEN */
+  /* ── DONE SCREEN ── */
   .done-card{
     background:#fff;
     border-radius:28px;
@@ -289,10 +329,17 @@
 </head>
 <body>
 
+<!-- ── SPLASH OVERLAY ── -->
+<div id="splash">
+  <h2>🌟 Short A Sound! 🌟</h2>
+  <p>Hover over a letter to hear its sound.<br>Then click the letter that completes the word!</p>
+  <button id="begin-btn" onclick="beginActivity()">Let's Begin! 🚀</button>
+</div>
+
 <h1>🌟 Short A Sound! 🌟</h1>
 <p class="directions">Hover over a letter to hear its sound. Click the letter that completes the word!</p>
 
-<!-- PROGRESS BAR -->
+<!-- ── PROGRESS BAR ── -->
 <div class="progress-wrap">
   <div class="progress-label" id="prog-label">Question 1 of 5</div>
   <div class="progress-track">
@@ -300,7 +347,7 @@
   </div>
 </div>
 
-<!-- Q1: ant - beginning a -->
+<!-- Q1: ant -->
 <div class="card active" id="card-0">
   <div class="question-row">
     <div class="picture">🐜</div>
@@ -316,7 +363,7 @@
   <button class="continue-btn" id="cont-0" onclick="nextQ(1)">Keep Going! ➡️</button>
 </div>
 
-<!-- Q2: jam - middle a -->
+<!-- Q2: jam -->
 <div class="card" id="card-1">
   <div class="question-row">
     <div class="picture">🍓</div>
@@ -332,7 +379,7 @@
   <button class="continue-btn" id="cont-1" onclick="nextQ(2)">Keep Going! ➡️</button>
 </div>
 
-<!-- Q3: apple - beginning a -->
+<!-- Q3: apple -->
 <div class="card" id="card-2">
   <div class="question-row">
     <div class="picture">🍎</div>
@@ -350,7 +397,7 @@
   <button class="continue-btn" id="cont-2" onclick="nextQ(3)">Keep Going! ➡️</button>
 </div>
 
-<!-- Q4: van - middle a -->
+<!-- Q4: van -->
 <div class="card" id="card-3">
   <div class="question-row">
     <div class="picture">🚐</div>
@@ -366,7 +413,7 @@
   <button class="continue-btn" id="cont-3" onclick="nextQ(4)">Keep Going! ➡️</button>
 </div>
 
-<!-- Q5: hat - middle a -->
+<!-- Q5: hat -->
 <div class="card" id="card-4">
   <div class="question-row">
     <div class="picture">🎩</div>
@@ -393,68 +440,45 @@
   // ── DATA ──────────────────────────────────────────────────────────────
   const questions = [
     {
-      answer: 'a',
-      word: 'ant',
-      position: 'beginning',
-      correctSpeak: "Yes! The word ant starts with the short A sound!",
-      correctText:  "Yes! The word ANT starts with the short A sound!",
-      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
-      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+      answer:'a', word:'ant',
+      correctSpeak:"Yes! The word ant starts with the short A sound!",
+      correctText:"Yes! The word ANT starts with the short A sound!",
+      wrongSpeak:"Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:"Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
     },
     {
-      answer: 'a',
-      word: 'jam',
-      position: 'middle',
-      correctSpeak: "Yes! The word jam has the short A sound in the middle!",
-      correctText:  "Yes! The word JAM has the short A sound in the middle!",
-      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
-      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+      answer:'a', word:'jam',
+      correctSpeak:"Yes! The word jam has the short A sound in the middle!",
+      correctText:"Yes! The word JAM has the short A sound in the middle!",
+      wrongSpeak:"Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:"Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
     },
     {
-      answer: 'a',
-      word: 'apple',
-      position: 'beginning',
-      correctSpeak: "Yes! The word apple starts with the short A sound!",
-      correctText:  "Yes! The word APPLE starts with the short A sound!",
-      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
-      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+      answer:'a', word:'apple',
+      correctSpeak:"Yes! The word apple starts with the short A sound!",
+      correctText:"Yes! The word APPLE starts with the short A sound!",
+      wrongSpeak:"Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:"Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
     },
     {
-      answer: 'a',
-      word: 'van',
-      position: 'middle',
-      correctSpeak: "Yes! The word van has the short A sound in the middle!",
-      correctText:  "Yes! The word VAN has the short A sound in the middle!",
-      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
-      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+      answer:'a', word:'van',
+      correctSpeak:"Yes! The word van has the short A sound in the middle!",
+      correctText:"Yes! The word VAN has the short A sound in the middle!",
+      wrongSpeak:"Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:"Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
     },
     {
-      answer: 'a',
-      word: 'hat',
-      position: 'middle',
-      correctSpeak: "Yes! The word hat has the short A sound in the middle!",
-      correctText:  "Yes! The word HAT has the short A sound in the middle!",
-      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
-      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+      answer:'a', word:'hat',
+      correctSpeak:"Yes! The word hat has the short A sound in the middle!",
+      correctText:"Yes! The word HAT has the short A sound in the middle!",
+      wrongSpeak:"Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:"Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
     }
   ];
 
-  // Short vowel phonetic spoken strings — crafted to sound right via TTS
-  // 'a' -> slow stretched "aaa", others use their short vowel sound
+  // Short vowel spoken sounds — stretched to coach TTS into the right phoneme
   const phoneticSpeak = {
-    'a': 'aaa',   // short a as in cat  — stretched so TTS says it right
-    'e': 'ehh',   // short e as in bed
-    'i': 'ih',    // short i as in sit
-    'o': 'aww',   // short o as in hot
-    'u': 'uh'     // short u as in cup
-  };
-  // What shows under the letter on the button (visual hint)
-  const phoneticLabel = {
-    'a': 'aaa',
-    'e': 'eh',
-    'i': 'ih',
-    'o': 'aw',
-    'u': 'uh'
+    'a':'aaa', 'e':'ehh', 'i':'ih', 'o':'aww', 'u':'uh'
   };
 
   const distractors = ['e','i','o','u'];
@@ -464,38 +488,40 @@
   // ── VOICE SETUP ───────────────────────────────────────────────────────
   function pickVoice() {
     const voices = window.speechSynthesis.getVoices();
-    // Priority list: natural-sounding en-US voices
-    const priority = [
-      'Google US English',
-      'Samantha',
-      'Karen',
-      'Moira',
-      'Victoria',
-      'Alex'
-    ];
+    const priority = ['Google US English','Samantha','Karen','Moira','Victoria','Alex'];
     for (const name of priority) {
       const v = voices.find(v => v.name === name);
       if (v) { selectedVoice = v; return; }
     }
-    // Fallback: any en-US voice
     selectedVoice = voices.find(v => v.lang === 'en-US') || voices[0] || null;
   }
-
-  window.speechSynthesis.onvoiceschanged = () => {
-    pickVoice();
-  };
-  // Also try immediately in case voices already loaded
+  window.speechSynthesis.onvoiceschanged = pickVoice;
   pickVoice();
 
   function speak(text, rate=0.82, pitch=1.05) {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.rate = rate;
-    u.pitch = pitch;
-    u.volume = 1;
+    u.rate = rate; u.pitch = pitch; u.volume = 1;
     if (selectedVoice) u.voice = selectedVoice;
     window.speechSynthesis.speak(u);
+  }
+
+  // ── SPLASH / BEGIN ────────────────────────────────────────────────────
+  function beginActivity() {
+    const splash = document.getElementById('splash');
+    splash.style.transition = 'opacity 0.5s ease';
+    splash.style.opacity = '0';
+    setTimeout(() => { splash.style.display = 'none'; }, 500);
+
+    setTimeout(() => {
+      speak(
+        "Welcome! Let us practice the short A sound. A says aaa. " +
+        "Hover over a letter to hear its sound. Then click the letter that completes the word! " +
+        "Look at the ant — can you find the missing letter?",
+        0.88, 1.1
+      );
+    }, 600);
   }
 
   // ── PROGRESS BAR ─────────────────────────────────────────────────────
@@ -517,16 +543,12 @@
         const btn = document.createElement('button');
         btn.className = 'choice-btn';
         btn.dataset.letter = letter;
-        btn.innerHTML =
-          '<span>' + letter.toUpperCase() + '</span>' +
-          '<span class="phonetic">' + phoneticLabel[letter] + '</span>';
+        btn.textContent = letter.toUpperCase();
 
-        // HOVER → play phonetic sound BEFORE any click
+        // HOVER → play phonetic sound before any click
         btn.addEventListener('mouseenter', () => {
           clearTimeout(hoverTimer);
-          hoverTimer = setTimeout(() => {
-            speak(phoneticSpeak[letter], 0.7, 1.2);
-          }, 60);
+          hoverTimer = setTimeout(() => speak(phoneticSpeak[letter], 0.7, 1.2), 60);
         });
         btn.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
 
@@ -544,11 +566,10 @@
     const box        = document.getElementById('box-' + qIdx);
 
     if (letter === q.answer) {
-      // ✅ CORRECT
-      btn.classList.add('correct');
-      // Disable all buttons
+      // ✅ CORRECT — disable all buttons, fill box, show feedback, then continue button
       document.querySelectorAll('#choices-' + qIdx + ' .choice-btn')
         .forEach(b => b.disabled = true);
+      btn.classList.add('correct');
 
       box.classList.remove('blank');
       box.classList.add('filled');
@@ -559,36 +580,33 @@
 
       speak(q.correctSpeak, 0.88, 1.1);
 
-      // Show continue button after a pause so feedback is heard
-      setTimeout(() => { contBtn.style.display = 'block'; }, 1800);
+      // Continue button appears after a pause so feedback can be read/heard
+      setTimeout(() => { contBtn.style.display = 'block'; }, 2200);
 
     } else {
-      // ❌ WRONG — shake, show feedback, then reset that button only
+      // ❌ WRONG — shake the button, show feedback, reset only that button
+      // Do NOT disable other buttons — student can keep trying
+      btn.disabled = true;
       btn.classList.add('wrong');
+
+      // Show wrong feedback and keep it visible until correct answer chosen
       feedbackEl.className = 'feedback-box wrong-fb';
       feedbackEl.innerHTML = '🤔 ' + q.wrongText;
 
       speak(q.wrongSpeak, 0.88, 1.05);
 
-      // Reset the wrong button after shake so student can try again
+      // After shake animation, reset the wrong button so they can try again
       setTimeout(() => {
         btn.classList.remove('wrong');
         btn.disabled = false;
-        // Clear feedback after a moment so it doesn't pile up
-        setTimeout(() => {
-          if (!document.getElementById('cont-' + qIdx).style.display ||
-              document.getElementById('cont-' + qIdx).style.display === 'none') {
-            feedbackEl.className = 'feedback-box';
-            feedbackEl.innerHTML = '';
-          }
-        }, 2500);
       }, 1400);
+      // NOTE: feedback stays on screen until they get it right
     }
   }
 
   // ── NAVIGATION ────────────────────────────────────────────────────────
   function nextQ(idx) {
-    document.getElementById('card-' + (idx - 1)).classList.remove('active');
+    document.getElementById('card-' + (idx-1)).classList.remove('active');
     document.getElementById('card-' + idx).classList.add('active');
     updateProgress(idx);
 
@@ -606,19 +624,16 @@
     document.getElementById('card-4').classList.remove('active');
     document.getElementById('done').classList.add('active');
     updateProgress(5);
-    speak(
-      "Amazing work! You found all five short A sounds! You are a superstar reader! Great job today!",
-      0.88, 1.1
-    );
+    speak("Amazing work! You found all five short A sounds! You are a superstar reader! Great job today!", 0.88, 1.1);
   }
 
   function restart() { location.reload(); }
 
   function shuffle(arr) {
     const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
+    for (let i = a.length-1; i > 0; i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
     }
     return a;
   }
@@ -626,16 +641,6 @@
   // ── INIT ──────────────────────────────────────────────────────────────
   buildChoices();
   updateProgress(0);
-
-  // Welcome narration
-  setTimeout(() => {
-    speak(
-      "Welcome! Let us practice the short A sound. A says aaa. " +
-      "Hover over a letter to hear its sound. Then click the letter that completes the word! " +
-      "Look at the ant — can you find the missing letter?",
-      0.88, 1.1
-    );
-  }, 900);
 </script>
 </body>
 </html>
