@@ -14,110 +14,140 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding:20px 10px 40px;
+    padding:16px 10px 40px;
   }
   h1{
-    font-size:2.6rem;
+    font-size:2.4rem;
     font-weight:900;
     color:#fff;
     text-shadow:3px 3px 0 #e91e63,5px 5px 0 #880e4f;
-    margin-bottom:6px;
+    margin-bottom:8px;
     text-align:center;
-    letter-spacing:1px;
   }
   .directions{
-    font-size:1.25rem;
+    font-size:1.15rem;
     color:#fff;
     font-weight:700;
     text-shadow:1px 1px 0 #555;
-    margin-bottom:24px;
+    margin-bottom:16px;
     text-align:center;
     background:rgba(0,0,0,0.15);
     border-radius:20px;
-    padding:10px 24px;
+    padding:8px 22px;
   }
+
+  /* PROGRESS BAR */
+  .progress-wrap{
+    width:100%;
+    max-width:640px;
+    margin-bottom:18px;
+  }
+  .progress-label{
+    font-size:1rem;
+    font-weight:700;
+    color:#fff;
+    text-shadow:1px 1px 0 #555;
+    margin-bottom:6px;
+    text-align:right;
+  }
+  .progress-track{
+    width:100%;
+    height:22px;
+    background:rgba(255,255,255,0.45);
+    border-radius:50px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#ff4081,#f50057);
+    border-radius:50px;
+    transition:width 0.5s ease;
+    width:0%;
+  }
+
+  /* CARD */
   .card{
     background:#fff;
     border-radius:28px;
     box-shadow:0 8px 24px rgba(0,0,0,0.18);
-    padding:28px 32px;
-    max-width:680px;
+    padding:26px 28px;
+    max-width:640px;
     width:100%;
     margin-bottom:10px;
     display:none;
   }
   .card.active{display:block;}
+
+  /* QUESTION ROW */
   .question-row{
     display:flex;
     align-items:center;
-    gap:28px;
-    margin-bottom:28px;
+    gap:24px;
+    margin-bottom:24px;
   }
   .picture{
-    font-size:6rem;
+    font-size:5.5rem;
     line-height:1;
-    min-width:110px;
+    min-width:100px;
     text-align:center;
     filter:drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+    flex-shrink:0;
   }
   .letter-boxes{
     display:flex;
-    gap:10px;
+    gap:8px;
     flex-wrap:wrap;
+    align-items:center;
   }
   .box{
-    width:72px;
-    height:80px;
+    width:66px;
+    height:74px;
     border:4px solid #e91e63;
-    border-radius:16px;
+    border-radius:14px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:2.6rem;
+    font-size:2.4rem;
     font-weight:900;
     color:#333;
     background:#fff;
-    transition:transform 0.15s;
   }
   .box.blank{
     background:#fff9c4;
     border:4px dashed #ff9800;
-    color:transparent;
     position:relative;
   }
   .box.blank::after{
     content:'_';
-    position:absolute;
-    bottom:10px;
-    left:50%;
-    transform:translateX(-50%);
     font-size:2rem;
     color:#ff9800;
-    line-height:1;
   }
   .box.filled{
     background:#e8f5e9;
     border:4px solid #4caf50;
     color:#2e7d32;
-    animation:pop 0.3s ease;
+    animation:pop 0.35s ease;
   }
-  @keyframes pop{0%{transform:scale(0.7)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+  @keyframes pop{0%{transform:scale(0.6)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+  /* CHOICES */
   .choices-label{
-    font-size:1.05rem;
+    font-size:1rem;
     font-weight:700;
     color:#888;
-    margin-bottom:12px;
+    margin-bottom:10px;
     text-align:center;
   }
   .choices{
     display:flex;
-    gap:12px;
+    gap:10px;
     justify-content:center;
     flex-wrap:wrap;
   }
   .choice-btn{
-    width:68px;
-    height:76px;
+    width:72px;
+    height:80px;
     border-radius:18px;
     border:4px solid #64b5f6;
     background:#e3f2fd;
@@ -125,109 +155,150 @@
     font-weight:900;
     color:#1565c0;
     cursor:pointer;
-    transition:all 0.18s;
+    transition:all 0.15s;
     font-family:'Nunito',sans-serif;
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
     position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    line-height:1;
+  }
+  .choice-btn .phonetic{
+    font-size:0.62rem;
+    font-weight:700;
+    color:#1976d2;
+    letter-spacing:0.5px;
+    opacity:0.75;
   }
   .choice-btn:hover{
     background:#bbdefb;
-    transform:scale(1.12) translateY(-4px);
+    transform:scale(1.13) translateY(-4px);
     border-color:#1976d2;
-    box-shadow:0 8px 18px rgba(25,118,210,0.25);
+    box-shadow:0 8px 18px rgba(25,118,210,0.3);
   }
   .choice-btn:disabled{
     opacity:0.4;
     cursor:not-allowed;
     transform:none;
+    box-shadow:none;
   }
   .choice-btn.correct{
     background:#c8e6c9;
     border-color:#43a047;
     color:#2e7d32;
-    animation:pop 0.3s ease;
+    animation:pop 0.35s ease;
   }
   .choice-btn.wrong{
     background:#ffcdd2;
     border-color:#e53935;
     color:#c62828;
-    animation:shake 0.4s ease;
+    animation:shake 0.45s ease;
   }
-  @keyframes shake{0%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}100%{transform:translateX(0)}}
-  .feedback{
+  @keyframes shake{
+    0%{transform:translateX(0)}
+    20%{transform:translateX(-9px)}
+    40%{transform:translateX(9px)}
+    60%{transform:translateX(-6px)}
+    80%{transform:translateX(6px)}
+    100%{transform:translateX(0)}
+  }
+
+  /* FEEDBACK */
+  .feedback-box{
+    margin-top:18px;
+    min-height:52px;
+    border-radius:16px;
+    padding:10px 16px;
+    font-size:1.15rem;
+    font-weight:700;
     text-align:center;
-    font-size:1.4rem;
-    font-weight:900;
-    margin:18px 0 4px;
-    min-height:38px;
-    color:#e91e63;
-    text-shadow:1px 1px 0 #fff;
-  }
-  .next-btn{
     display:none;
-    margin:14px auto 0;
+  }
+  .feedback-box.correct-fb{
+    background:#e8f5e9;
+    color:#2e7d32;
+    border:3px solid #81c784;
+    display:block;
+  }
+  .feedback-box.wrong-fb{
+    background:#fff3e0;
+    color:#e65100;
+    border:3px solid #ffb74d;
+    display:block;
+  }
+  .feedback-box .sound-word{
+    display:inline-block;
+    background:#fff9c4;
+    border:2px dashed #ff9800;
+    border-radius:8px;
+    padding:1px 7px;
+    color:#e65100;
+    font-style:italic;
+  }
+
+  /* CONTINUE BUTTON */
+  .continue-btn{
+    display:none;
+    margin:16px auto 0;
     background:linear-gradient(135deg,#ff4081,#f50057);
     color:#fff;
     border:none;
     border-radius:50px;
-    padding:14px 36px;
+    padding:14px 40px;
     font-size:1.2rem;
     font-weight:900;
     cursor:pointer;
     font-family:'Nunito',sans-serif;
-    box-shadow:0 6px 18px rgba(245,0,87,0.4);
+    box-shadow:0 6px 18px rgba(245,0,87,0.35);
     transition:all 0.2s;
   }
-  .next-btn:hover{transform:scale(1.06);box-shadow:0 10px 24px rgba(245,0,87,0.5);}
+  .continue-btn:hover{transform:scale(1.06);box-shadow:0 10px 24px rgba(245,0,87,0.5);}
+
+  /* DONE SCREEN */
   .done-card{
     background:#fff;
     border-radius:28px;
     box-shadow:0 8px 24px rgba(0,0,0,0.18);
-    padding:40px 32px;
-    max-width:680px;
+    padding:40px 28px;
+    max-width:640px;
     width:100%;
     text-align:center;
     display:none;
   }
   .done-card.active{display:block;}
-  .done-card h2{font-size:2.4rem;color:#e91e63;margin-bottom:12px;}
-  .done-card p{font-size:1.3rem;color:#555;margin-bottom:24px;}
+  .done-card h2{font-size:2.2rem;color:#e91e63;margin-bottom:12px;}
+  .done-card p{font-size:1.2rem;color:#555;margin-bottom:24px;line-height:1.6;}
   .restart-btn{
     background:linear-gradient(135deg,#00bcd4,#0097a7);
     color:#fff;
     border:none;
     border-radius:50px;
     padding:14px 36px;
-    font-size:1.2rem;
+    font-size:1.15rem;
     font-weight:900;
     cursor:pointer;
     font-family:'Nunito',sans-serif;
-    box-shadow:0 6px 18px rgba(0,150,136,0.4);
+    box-shadow:0 6px 18px rgba(0,150,136,0.35);
     transition:all 0.2s;
   }
   .restart-btn:hover{transform:scale(1.06);}
-  .progress-dots{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    margin-bottom:22px;
-  }
-  .dot{
-    width:18px;height:18px;
-    border-radius:50%;
-    background:#ddd;
-    transition:background 0.3s;
-  }
-  .dot.done{background:#4caf50;}
-  .dot.active{background:#ff4081;}
 </style>
 </head>
 <body>
 
 <h1>🌟 Short A Sound! 🌟</h1>
-<p class="directions">Click the letter that completes the word!</p>
+<p class="directions">Hover over a letter to hear its sound. Click the letter that completes the word!</p>
 
-<div class="progress-dots" id="dots"></div>
+<!-- PROGRESS BAR -->
+<div class="progress-wrap">
+  <div class="progress-label" id="prog-label">Question 1 of 5</div>
+  <div class="progress-track">
+    <div class="progress-fill" id="prog-fill"></div>
+  </div>
+</div>
 
 <!-- Q1: ant - beginning a -->
 <div class="card active" id="card-0">
@@ -239,10 +310,10 @@
       <div class="box">t</div>
     </div>
   </div>
-  <p class="choices-label">Pick the missing letter 👇</p>
+  <p class="choices-label">Hover to hear the sound. Click to fill in the blank! 👇</p>
   <div class="choices" id="choices-0"></div>
-  <div class="feedback" id="feedback-0"></div>
-  <button class="next-btn" id="next-0" onclick="nextQ(1)">Next ➡️</button>
+  <div class="feedback-box" id="feedback-0"></div>
+  <button class="continue-btn" id="cont-0" onclick="nextQ(1)">Keep Going! ➡️</button>
 </div>
 
 <!-- Q2: jam - middle a -->
@@ -255,10 +326,10 @@
       <div class="box">m</div>
     </div>
   </div>
-  <p class="choices-label">Pick the missing letter 👇</p>
+  <p class="choices-label">Hover to hear the sound. Click to fill in the blank! 👇</p>
   <div class="choices" id="choices-1"></div>
-  <div class="feedback" id="feedback-1"></div>
-  <button class="next-btn" id="next-1" onclick="nextQ(2)">Next ➡️</button>
+  <div class="feedback-box" id="feedback-1"></div>
+  <button class="continue-btn" id="cont-1" onclick="nextQ(2)">Keep Going! ➡️</button>
 </div>
 
 <!-- Q3: apple - beginning a -->
@@ -273,10 +344,10 @@
       <div class="box">e</div>
     </div>
   </div>
-  <p class="choices-label">Pick the missing letter 👇</p>
+  <p class="choices-label">Hover to hear the sound. Click to fill in the blank! 👇</p>
   <div class="choices" id="choices-2"></div>
-  <div class="feedback" id="feedback-2"></div>
-  <button class="next-btn" id="next-2" onclick="nextQ(3)">Next ➡️</button>
+  <div class="feedback-box" id="feedback-2"></div>
+  <button class="continue-btn" id="cont-2" onclick="nextQ(3)">Keep Going! ➡️</button>
 </div>
 
 <!-- Q4: van - middle a -->
@@ -289,10 +360,10 @@
       <div class="box">n</div>
     </div>
   </div>
-  <p class="choices-label">Pick the missing letter 👇</p>
+  <p class="choices-label">Hover to hear the sound. Click to fill in the blank! 👇</p>
   <div class="choices" id="choices-3"></div>
-  <div class="feedback" id="feedback-3"></div>
-  <button class="next-btn" id="next-3" onclick="nextQ(4)">Next ➡️</button>
+  <div class="feedback-box" id="feedback-3"></div>
+  <button class="continue-btn" id="cont-3" onclick="nextQ(4)">Keep Going! ➡️</button>
 </div>
 
 <!-- Q5: hat - middle a -->
@@ -305,79 +376,159 @@
       <div class="box">t</div>
     </div>
   </div>
-  <p class="choices-label">Pick the missing letter 👇</p>
+  <p class="choices-label">Hover to hear the sound. Click to fill in the blank! 👇</p>
   <div class="choices" id="choices-4"></div>
-  <div class="feedback" id="feedback-4"></div>
-  <button class="next-btn" id="next-4" onclick="showDone()">Finish 🎉</button>
+  <div class="feedback-box" id="feedback-4"></div>
+  <button class="continue-btn" id="cont-4" onclick="showDone()">Finish! 🎉</button>
 </div>
 
-<!-- Done Screen -->
+<!-- DONE SCREEN -->
 <div class="done-card" id="done">
   <h2>🎉 Amazing Work! 🎉</h2>
-  <p>You found all the <strong>short A</strong> sounds!<br>You are a superstar reader! ⭐</p>
+  <p>You found all five<br><strong>short A</strong> sounds!<br>You are a superstar reader! ⭐</p>
   <button class="restart-btn" onclick="restart()">🔄 Play Again!</button>
 </div>
 
 <script>
-  // Questions: answer letter + 4 distractors + word name for narrator
+  // ── DATA ──────────────────────────────────────────────────────────────
   const questions = [
-    { q: 0, answer: 'a', distractors: ['e','i','o','u'], word: 'ant', sound: 'beginning' },
-    { q: 1, answer: 'a', distractors: ['e','i','o','u'], word: 'jam', sound: 'middle' },
-    { q: 2, answer: 'a', distractors: ['e','i','o','u'], word: 'apple', sound: 'beginning' },
-    { q: 3, answer: 'a', distractors: ['e','i','o','u'], word: 'van', sound: 'middle' },
-    { q: 4, answer: 'a', distractors: ['e','i','o','u'], word: 'hat', sound: 'middle' },
+    {
+      answer: 'a',
+      word: 'ant',
+      position: 'beginning',
+      correctSpeak: "Yes! The word ant starts with the short A sound!",
+      correctText:  "Yes! The word ANT starts with the short A sound!",
+      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+    },
+    {
+      answer: 'a',
+      word: 'jam',
+      position: 'middle',
+      correctSpeak: "Yes! The word jam has the short A sound in the middle!",
+      correctText:  "Yes! The word JAM has the short A sound in the middle!",
+      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+    },
+    {
+      answer: 'a',
+      word: 'apple',
+      position: 'beginning',
+      correctSpeak: "Yes! The word apple starts with the short A sound!",
+      correctText:  "Yes! The word APPLE starts with the short A sound!",
+      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+    },
+    {
+      answer: 'a',
+      word: 'van',
+      position: 'middle',
+      correctSpeak: "Yes! The word van has the short A sound in the middle!",
+      correctText:  "Yes! The word VAN has the short A sound in the middle!",
+      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+    },
+    {
+      answer: 'a',
+      word: 'hat',
+      position: 'middle',
+      correctSpeak: "Yes! The word hat has the short A sound in the middle!",
+      correctText:  "Yes! The word HAT has the short A sound in the middle!",
+      wrongSpeak:   "Let's try again! Listen for the short A sound — aaa. Which letter makes that sound?",
+      wrongText:    "Let's try again! Listen for the short A sound — <span class='sound-word'>aaa</span>. Which letter makes that sound?"
+    }
   ];
 
-  // Phonetic sounds for each letter (short vowel / consonant sounds)
-  const phoneticMap = {
-    'a': 'aaa', 'e': 'eh', 'i': 'ih', 'o': 'awe', 'u': 'uh',
-    'b':'buh','c':'kuh','d':'duh','f':'fuh','g':'guh','h':'huh',
-    'j':'juh','k':'kuh','l':'luh','m':'muh','n':'nuh','p':'puh',
-    'r':'ruh','s':'suh','t':'tuh','v':'vuh','w':'wuh','x':'ks','y':'yuh','z':'zuh'
+  // Short vowel phonetic spoken strings — crafted to sound right via TTS
+  // 'a' -> slow stretched "aaa", others use their short vowel sound
+  const phoneticSpeak = {
+    'a': 'aaa',   // short a as in cat  — stretched so TTS says it right
+    'e': 'ehh',   // short e as in bed
+    'i': 'ih',    // short i as in sit
+    'o': 'aww',   // short o as in hot
+    'u': 'uh'     // short u as in cup
+  };
+  // What shows under the letter on the button (visual hint)
+  const phoneticLabel = {
+    'a': 'aaa',
+    'e': 'eh',
+    'i': 'ih',
+    'o': 'aw',
+    'u': 'uh'
   };
 
-  let hoverTimeout = null;
+  const distractors = ['e','i','o','u'];
+  let selectedVoice = null;
+  let hoverTimer = null;
 
-  function speak(text, rate=0.88, pitch=1.15) {
+  // ── VOICE SETUP ───────────────────────────────────────────────────────
+  function pickVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    // Priority list: natural-sounding en-US voices
+    const priority = [
+      'Google US English',
+      'Samantha',
+      'Karen',
+      'Moira',
+      'Victoria',
+      'Alex'
+    ];
+    for (const name of priority) {
+      const v = voices.find(v => v.name === name);
+      if (v) { selectedVoice = v; return; }
+    }
+    // Fallback: any en-US voice
+    selectedVoice = voices.find(v => v.lang === 'en-US') || voices[0] || null;
+  }
+
+  window.speechSynthesis.onvoiceschanged = () => {
+    pickVoice();
+  };
+  // Also try immediately in case voices already loaded
+  pickVoice();
+
+  function speak(text, rate=0.82, pitch=1.05) {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.rate = rate;
     u.pitch = pitch;
     u.volume = 1;
-    // Try to pick a friendly voice
-    const voices = window.speechSynthesis.getVoices();
-    const preferred = voices.find(v =>
-      v.name.includes('Samantha') || v.name.includes('Karen') ||
-      v.name.includes('Moira') || v.name.includes('Google US') ||
-      v.lang === 'en-US'
-    );
-    if (preferred) u.voice = preferred;
+    if (selectedVoice) u.voice = selectedVoice;
     window.speechSynthesis.speak(u);
   }
 
-  function speakPhonetic(letter) {
-    const sound = phoneticMap[letter] || letter;
-    speak(sound, 0.75, 1.3);
+  // ── PROGRESS BAR ─────────────────────────────────────────────────────
+  function updateProgress(qIdx) {
+    const pct = (qIdx / questions.length) * 100;
+    document.getElementById('prog-fill').style.width = pct + '%';
+    document.getElementById('prog-label').textContent =
+      qIdx < questions.length
+        ? 'Question ' + (qIdx + 1) + ' of ' + questions.length
+        : 'All done!';
   }
 
-  // Build choice buttons for each question
+  // ── BUILD CHOICES ─────────────────────────────────────────────────────
   function buildChoices() {
     questions.forEach((q, idx) => {
       const container = document.getElementById('choices-' + idx);
-      const letters = shuffle([q.answer, ...q.distractors]);
+      const letters = shuffle([q.answer, ...distractors]);
       letters.forEach(letter => {
         const btn = document.createElement('button');
         btn.className = 'choice-btn';
-        btn.textContent = letter.toUpperCase();
         btn.dataset.letter = letter;
+        btn.innerHTML =
+          '<span>' + letter.toUpperCase() + '</span>' +
+          '<span class="phonetic">' + phoneticLabel[letter] + '</span>';
 
-        // Hover: play phonetic sound
+        // HOVER → play phonetic sound BEFORE any click
         btn.addEventListener('mouseenter', () => {
-          clearTimeout(hoverTimeout);
-          hoverTimeout = setTimeout(() => speakPhonetic(letter), 80);
+          clearTimeout(hoverTimer);
+          hoverTimer = setTimeout(() => {
+            speak(phoneticSpeak[letter], 0.7, 1.2);
+          }, 60);
         });
-        btn.addEventListener('mouseleave', () => clearTimeout(hoverTimeout));
+        btn.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
 
         btn.addEventListener('click', () => handleAnswer(idx, letter, btn));
         container.appendChild(btn);
@@ -385,80 +536,83 @@
     });
   }
 
+  // ── ANSWER HANDLING ───────────────────────────────────────────────────
   function handleAnswer(qIdx, letter, btn) {
     const q = questions[qIdx];
-    const allBtns = document.querySelectorAll('#choices-' + qIdx + ' .choice-btn');
-    allBtns.forEach(b => b.disabled = true);
-
-    const box = document.getElementById('box-' + qIdx);
-    const feedback = document.getElementById('feedback-' + qIdx);
-    const nextBtn = document.getElementById('next-' + qIdx);
+    const feedbackEl = document.getElementById('feedback-' + qIdx);
+    const contBtn    = document.getElementById('cont-' + qIdx);
+    const box        = document.getElementById('box-' + qIdx);
 
     if (letter === q.answer) {
+      // ✅ CORRECT
       btn.classList.add('correct');
+      // Disable all buttons
+      document.querySelectorAll('#choices-' + qIdx + ' .choice-btn')
+        .forEach(b => b.disabled = true);
+
       box.classList.remove('blank');
       box.classList.add('filled');
       box.textContent = letter.toUpperCase();
 
-      const praises = [
-        'Woohoo! That is right! The short A says aaa — like in ' + q.word + '!',
-        'Yes! Great job! You heard the short A sound in ' + q.word + '!',
-        'Awesome! A says aaa and ' + q.word + ' has that sound!',
-        'You got it! Super work! The letter A says aaa in ' + q.word + '!',
-        'Fantastic! The short A says aaa — you found it in ' + q.word + '!'
-      ];
-      const msg = praises[qIdx % praises.length];
-      feedback.textContent = '🎉 ' + msg.split('!')[0] + '!';
-      feedback.style.color = '#2e7d32';
-      speak(msg, 0.9, 1.1);
+      feedbackEl.className = 'feedback-box correct-fb';
+      feedbackEl.innerHTML = '🎉 ' + q.correctText;
 
-      // Mark dot done
-      document.querySelectorAll('.dot')[qIdx].classList.remove('active');
-      document.querySelectorAll('.dot')[qIdx].classList.add('done');
+      speak(q.correctSpeak, 0.88, 1.1);
 
-      setTimeout(() => { nextBtn.style.display = 'block'; }, 1200);
+      // Show continue button after a pause so feedback is heard
+      setTimeout(() => { contBtn.style.display = 'block'; }, 1800);
+
     } else {
+      // ❌ WRONG — shake, show feedback, then reset that button only
       btn.classList.add('wrong');
-      feedback.textContent = '🤔 Hmm, listen again! Aaa... ' + q.word.toUpperCase().split('').join(' ');
-      feedback.style.color = '#c62828';
-      const tryMsg = 'Hmm, not quite! Listen carefully — the short A says aaa. Try again!';
-      speak(tryMsg, 0.88, 1.1);
+      feedbackEl.className = 'feedback-box wrong-fb';
+      feedbackEl.innerHTML = '🤔 ' + q.wrongText;
+
+      speak(q.wrongSpeak, 0.88, 1.05);
+
+      // Reset the wrong button after shake so student can try again
       setTimeout(() => {
         btn.classList.remove('wrong');
         btn.disabled = false;
-        feedback.textContent = '';
-      }, 1500);
+        // Clear feedback after a moment so it doesn't pile up
+        setTimeout(() => {
+          if (!document.getElementById('cont-' + qIdx).style.display ||
+              document.getElementById('cont-' + qIdx).style.display === 'none') {
+            feedbackEl.className = 'feedback-box';
+            feedbackEl.innerHTML = '';
+          }
+        }, 2500);
+      }, 1400);
     }
   }
 
+  // ── NAVIGATION ────────────────────────────────────────────────────────
   function nextQ(idx) {
     document.getElementById('card-' + (idx - 1)).classList.remove('active');
     document.getElementById('card-' + idx).classList.add('active');
-    document.querySelectorAll('.dot')[idx].classList.add('active');
+    updateProgress(idx);
 
-    // Narrate the next question
-    const q = questions[idx];
     const narrations = [
-      'Look at the ant! Can you find the missing letter in the word ant? aaa — ant!',
-      'Yummy! Look at the jar of jam! What letter is missing? j — blank — m. Jam! aaa!',
-      'Mmm, an apple! What letter comes first? aaa — apple! Find the letter A!',
-      'Vroom! Here comes a van! What letter is hiding in the middle? v — blank — n. Van! aaa!',
-      'Check out this hat! What letter is in the middle? h — blank — t. Hat! aaa!'
+      "Look at the ant! Can you find the missing letter? Say it with me — aaa — ant!",
+      "Look at the jar of jam! What letter is missing in the middle? j... blank ...m. Jam!",
+      "Look at the apple! What letter comes first? Say it with me — aaa — apple!",
+      "Here comes a van! What letter is hiding in the middle? v... blank ...n. Van!",
+      "Look at the hat! What letter is in the middle? h... blank ...t. Hat!"
     ];
-    setTimeout(() => speak(narrations[idx], 0.88, 1.1), 300);
+    setTimeout(() => speak(narrations[idx], 0.88, 1.1), 400);
   }
 
   function showDone() {
     document.getElementById('card-4').classList.remove('active');
     document.getElementById('done').classList.add('active');
-    document.querySelectorAll('.dot')[4].classList.remove('active');
-    document.querySelectorAll('.dot')[4].classList.add('done');
-    speak('Amazing work! You found all five short A sounds! You are a superstar reader! Great job today!', 0.88, 1.1);
+    updateProgress(5);
+    speak(
+      "Amazing work! You found all five short A sounds! You are a superstar reader! Great job today!",
+      0.88, 1.1
+    );
   }
 
-  function restart() {
-    location.reload();
-  }
+  function restart() { location.reload(); }
 
   function shuffle(arr) {
     const a = [...arr];
@@ -469,30 +623,19 @@
     return a;
   }
 
-  // Build progress dots
-  function buildDots() {
-    const container = document.getElementById('dots');
-    questions.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = 'dot' + (i === 0 ? ' active' : '');
-      container.appendChild(dot);
-    });
-  }
-
-  // Init
-  buildDots();
+  // ── INIT ──────────────────────────────────────────────────────────────
   buildChoices();
+  updateProgress(0);
 
-  // Narrate first question after voices load
-  window.speechSynthesis.onvoiceschanged = () => {
-    speak('Welcome! Let us practice the short A sound. A says aaa. Click the letter that completes the word!', 0.88, 1.1);
-  };
-  // Fallback for browsers where voices are already loaded
+  // Welcome narration
   setTimeout(() => {
-    if (window.speechSynthesis.getVoices().length > 0) {
-      speak('Welcome! Let us practice the short A sound. A says aaa. Look at the ant — can you find the missing letter?', 0.88, 1.1);
-    }
-  }, 800);
+    speak(
+      "Welcome! Let us practice the short A sound. A says aaa. " +
+      "Hover over a letter to hear its sound. Then click the letter that completes the word! " +
+      "Look at the ant — can you find the missing letter?",
+      0.88, 1.1
+    );
+  }, 900);
 </script>
 </body>
 </html>
